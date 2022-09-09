@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">DragonSushi</string>
+    <string name="cadastre_se">cadastre-se</string>
+    <string name="nome_completo">Nome completo</string>
+    <string name="telefone">Telefone</string>
+    <string name="email">E-mail</string>
+    <string name="senha">Senha</string>
+    <string name="confirmar_senha">Confirmar senha</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="editar_perfil">Editar perfil</string>
+    <string name="editar">Editar</string>
+    <string name="salvar">Salvar</string>
+</resources>
