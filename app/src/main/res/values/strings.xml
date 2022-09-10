@@ -24,4 +24,7 @@
     <string name="complemento">Complemento</string>
     <string name="cidade">Cidade</string>
     <string name="uf">UF</string>
+    <string name="pedido_realizado">Pedido realizado com sucesso!</string>
+    <string name="aguarde">Fique no aguardo, seu pedido chegará em alguns intantes.</string>
+    <string name="voltar_pagina_principal">Voltar à página principal</string>
 </resources>
