@@ -24,6 +24,7 @@
         app:layout_constraintTop_toBottomOf="@+id/header">
 
         <ImageButton
+            android:id="@+id/btnEntradas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@mipmap/entradas" />
@@ -34,6 +35,7 @@
             android:layout_height="wrap_content"/>
 
         <ImageButton
+            android:id="@+id/btnPratosQuentes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@mipmap/pratos_quentes" />
@@ -44,6 +46,7 @@
             android:layout_height="wrap_content"/>
 
         <ImageButton
+            android:id="@+id/btnTemakis"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@mipmap/temakis" />
@@ -54,6 +57,7 @@
             android:layout_height="wrap_content"/>
 
         <ImageButton
+            android:id="@+id/btnPecas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@mipmap/pecas" />
@@ -64,6 +68,7 @@
             android:layout_height="wrap_content"/>
 
         <ImageButton
+            android:id="@+id/btnCombos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@mipmap/combos" />
@@ -74,10 +79,10 @@
             android:layout_height="wrap_content"/>
 
         <ImageButton
+            android:id="@+id/btnBebidas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@mipmap/bebidas" />
-
     </LinearLayout>
 
     <include

@@ -30,32 +30,33 @@
 
             <EditText
                 android:id="@+id/edtxtNome"
-                style="@style/editText"
+                style="@style/editTextRed"
                 android:hint="@string/nome_completo"
                 app:layout_constraintTop_toBottomOf="@+id/txtTituloCadastro" />
 
             <EditText
                 android:id="@+id/edtxtTelefone"
-                style="@style/editText"
+                style="@style/editTextRed"
                 android:hint="@string/telefone"
+                android:inputType="phone"
                 app:layout_constraintTop_toBottomOf="@+id/edtxtNome" />
 
             <EditText
                 android:id="@+id/edtxtEmail"
-                style="@style/editText"
+                style="@style/editTextRed"
                 android:hint="@string/email"
                 app:layout_constraintTop_toBottomOf="@+id/edtxtTelefone" />
 
             <EditText
                 android:id="@+id/edtxtSenha"
-                style="@style/editText"
+                style="@style/editTextRed"
                 android:hint="@string/senha"
                 android:inputType="textPassword"
                 app:layout_constraintTop_toBottomOf="@+id/edtxtEmail" />
 
             <EditText
                 android:id="@+id/edtxtConfSenha"
-                style="@style/editText"
+                style="@style/editTextRed"
                 android:hint="@string/confirmar_senha"
                 android:inputType="textPassword"
                 app:layout_constraintTop_toBottomOf="@+id/edtxtSenha" />
@@ -74,6 +75,7 @@
                 android:background="@mipmap/editar" />
 
             <Button
+                android:id="@+id/btnSalvar"
                 style="@style/buttonCadastrar"
                 android:layout_width="100dp"
                 android:layout_height="40dp"

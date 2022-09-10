@@ -10,4 +10,18 @@
     <string name="editar_perfil">Editar perfil</string>
     <string name="editar">Editar</string>
     <string name="salvar">Salvar</string>
+    <string name="formas_de_pagamento">Formas de pagamento</string>
+    <string name="cartao_credito">Cartão de crédito</string>
+    <string name="cartao_debito">Cartão de débito</string>
+    <string name="vale_refeicao">Vale refeição</string>
+    <string name="dinheiro">Dinheiro</string>
+    <string name="pix">Pix</string>
+    <string name="endereco">Endereço</string>
+    <string name="localizacao_atual">Usar localização atual</string>
+    <string name="cep">CEP</string>
+    <string name="numero">Número</string>
+    <string name="bairro">Bairro</string>
+    <string name="complemento">Complemento</string>
+    <string name="cidade">Cidade</string>
+    <string name="uf">UF</string>
 </resources>

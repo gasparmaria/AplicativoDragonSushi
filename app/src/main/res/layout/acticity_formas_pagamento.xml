@@ -1,7 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/view_half_screen"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
+        <TextView
+            android:id="@+id/txtTituloFormasPagto"
+            style="@style/title2"
+            android:layout_margin="15dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/formas_de_pagamento" />
+
+        <Button
+            android:id="@+id/btnCartaoCredito"
+            style="@style/buttonformaspagto"
+            android:text="@string/cartao_credito" />
+
+        <View
+            android:layout_height="1dp"
+            android:background="@color/gray_light"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="15dp"/>
+
+        <Button
+            android:id="@+id/btnCartaoDebito"
+            style="@style/buttonformaspagto"
+            android:text="@string/cartao_debito" />
+
+        <View
+            android:layout_height="1dp"
+            android:background="@color/gray_light"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="15dp"/>
+
+        <Button
+            android:id="@+id/btnValeRefeicao"
+            style="@style/buttonformaspagto"
+            android:text="@string/vale_refeicao" />
+
+        <View
+            android:layout_height="1dp"
+            android:background="@color/gray_light"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="15dp"/>
+
+        <Button
+            android:id="@+id/btnDinheiro"
+            style="@style/buttonformaspagto"
+            android:text="@string/dinheiro" />
+
+        <View
+            android:layout_height="1dp"
+            android:background="@color/gray_light"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="15dp"/>
+
+        <Button
+            android:id="@+id/btnPix"
+            style="@style/buttonformaspagto"
+            android:text="@string/pix" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
