@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/view_half_screen"
+        android:orientation="vertical"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/txtTituloEndereco"
+            style="@style/title2"
+            android:layout_marginBottom="10dp"
+            android:text="@string/endereco"
+            android:layout_marginVertical="10dp"/>
+
+        <LinearLayout
+            android:id="@+id/layoutLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            
+            <ImageView
+                android:id="@+id/imgLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_location"/>
+            
+            <TextView
+                android:id="@+id/txtLocation"
+                style="@style/textviewred"
+                android:text="@string/localizacao_atual"
+                android:layout_gravity="center_vertical"/>
+        </LinearLayout>
+        
+        <EditText
+            android:id="@+id/edtextLogradouro"
+            style="@style/editTextGray"
+            android:hint="Logradouro"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtextCep"
+                style="@style/editTextGray1"
+                android:hint="@string/cep"/>
+
+            <EditText
+                android:id="@+id/edtextNumero"
+                style="@style/editTextGray2"
+                android:hint="@string/numero"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtextBairro"
+                style="@style/editTextGray1"
+                android:hint="@string/bairro"/>
+
+            <EditText
+                android:id="@+id/edtextComplemento"
+                style="@style/editTextGray2"
+                android:hint="@string/complemento"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtextCidade"
+                style="@style/editTextGray1"
+                android:hint="@string/cidade"/>
+
+            <EditText
+                android:id="@+id/edtextUf"
+                style="@style/editTextGray2"
+                android:hint="@string/uf"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnSalvar"
+                style="@style/buttonSalvar"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:text="@string/salvar" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
