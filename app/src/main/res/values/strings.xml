@@ -27,4 +27,10 @@
     <string name="pedido_realizado">Pedido realizado com sucesso!</string>
     <string name="aguarde">Fique no aguardo, seu pedido chegará em alguns intantes.</string>
     <string name="voltar_pagina_principal">Voltar à página principal</string>
+    <string name="nome_do_usuario">Nome do usuário</string>
+    <string name="email_do_usuario">Email do usuário</string>
+    <string name="historico_de_pedidos">Histórico de pedidos</string>
+    <string name="nome_do_produto">Nome do produto</string>
+    <string name="preco">R$0,00</string>
+    <string name="descricao_do_produto">Descrição do produto</string>
 </resources>
