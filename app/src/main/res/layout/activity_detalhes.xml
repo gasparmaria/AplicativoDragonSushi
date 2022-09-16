@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <ImageView
+            android:id="@+id/imgProduto"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/gray_light" />
+
+        <ImageButton
+            android:id="@+id/btnVoltar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/ic_back" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="200dp"
+        android:orientation="vertical"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+        <TextView
+            android:id="@+id/txtNomeProduto"
+            style="@style/textviewblackbold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nome_do_produto" />
+
+        <TextView
+            android:id="@+id/txtDescr"
+            style="@style/textviewblack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="100dp"
+            android:layout_marginVertical="20dp"
+            android:text="@string/descricao_do_produto" />
+
+        <TextView
+            android:id="@+id/txtPrecoProduto"
+            style="@style/textviewblack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/preco" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/gray_light" />
+
+        <TextView
+            style="@style/textviewgray2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/observacao" />
+
+        <EditText
+            android:id="@+id/edtxtObservacao"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/edittext_gray" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="end"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/txtSubtotal"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnMenos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_minus" />
+
+                <TextView
+                    android:id="@+id/txtQuantidade"
+                    style="@style/textviewblack"
+                    android:layout_width="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:text="@string/_0"
+                    android:textSize="20dp" />
+
+                <ImageButton
+                    android:id="@+id/btnMais"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_plus" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtSubtotal"
+                style="@style/textviewgray3"
+                android:layout_width="wrap_content"
+                android:layout_above="@+id/btnAdicionar"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:text="@string/subtotal_000" />
+
+            <Button
+                android:id="@+id/btnAdicionar"
+                style="@style/buttonAdicionar"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:text="@string/adicionar_ao_carrinho"
+                android:textAllCaps="false" />
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

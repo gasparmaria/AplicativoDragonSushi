@@ -7,6 +7,8 @@
         <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/drawable/edittext_gray.xml" value="0.1425" />
         <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/drawable/ic_home.xml" value="0.187" />
         <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/drawable/ic_launcher_background.xml" value="0.187" />
+        <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/drawable/ic_minus.xml" value="0.174" />
+        <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/drawable/ic_plus.xml" value="0.174" />
         <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/drawable/rouded_button.xml" value="0.187" />
         <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/drawable/rounded_edittext.xml" value="0.2025" />
         <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/drawable/view_half_screen.xml" value="0.1425" />
@@ -15,15 +17,22 @@
         <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/font/poppings.xml" value="0.31743589743589745" />
         <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/font/poppins.xml" value="0.31846153846153846" />
         <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/layout/acticity_formas_pagamento.xml" value="0.25" />
+        <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/layout/activity_busca.xml" value="0.25" />
         <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/layout/activity_cadastro.xml" value="0.21422101449275363" />
+        <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/layout/activity_carrinho.xml" value="0.33" />
+        <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/layout/activity_categoria.xml" value="0.2921875" />
+        <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/layout/activity_detalhes.xml" value="0.33" />
         <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/layout/activity_editar.xml" value="0.25" />
         <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/layout/activity_endereco.xml" value="0.22" />
+        <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/layout/activity_historico.xml" value="0.2921875" />
         <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/layout/activity_pedido_realizado.xml" value="0.25" />
         <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/layout/activity_perfil.xml" value="0.2921875" />
         <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/layout/bottom_menu.xml" value="0.33" />
         <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/layout/header.xml" value="0.25" />
+        <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/layout/listview_carrinho.xml" value="0.33" />
+        <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/layout/listview_historico.xml" value="0.33" />
         <entry key="..\:/Users/Eduarda/AndroidStudioProjects/DragonSushi/app/src/main/res/layout/listview_produto.xml" value="0.29322916666666665" />
       </map>
     </option>

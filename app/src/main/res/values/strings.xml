@@ -33,4 +33,22 @@
     <string name="nome_do_produto">Nome do produto</string>
     <string name="preco">R$0,00</string>
     <string name="descricao_do_produto">Descrição do produto</string>
+    <string name="categoria">Categoria</string>
+    <string name="data">Data</string>
+    <string name="numero_de_itens">Número de itens</string>
+    <string name="historico">Histórico</string>
+    <string name="observacao">Observação</string>
+    <string name="_0">0</string>
+    <string name="subtotal_000">Subtotal: R$0,00</string>
+    <string name="adicionar_ao_carrinho">Adicionar ao carrinho</string>
+    <string name="carrinho">Carrinho</string>
+    <string name="limpar">Limpar</string>
+    <string name="subtotal">Subtotal:</string>
+    <string name="taxa_de_entrega">Taxa de entrega:</string>
+    <string name="total">Total:</string>
+    <string name="pagamento">Pagamento</string>
+    <string name="selecione_a_forma_de_pagamento">Selecione a forma de pagamento</string>
+    <string name="entrega">Entrega</string>
+    <string name="selecione_o_endere_o_de_entrega">Selecione o endereço de entrega</string>
+    <string name="fazer_pedido">Fazer pedido</string>
 </resources>
