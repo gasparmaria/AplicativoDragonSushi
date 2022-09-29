@@ -29,7 +29,7 @@
             android:text="@string/fazer_login"/>
 
         <EditText
-            android:id="@+id/edtxtEmail"
+            android:id="@+id/edtxtLogin"
             style="@style/editTextRed"
             android:hint="@string/login_"
             app:layout_constraintTop_toBottomOf="@+id/txtTituloLogin" />
@@ -39,7 +39,7 @@
             style="@style/editTextRed"
             android:hint="@string/senha_"
             android:inputType="textPassword"
-            app:layout_constraintTop_toBottomOf="@+id/edtxtEmail" />
+            app:layout_constraintTop_toBottomOf="@+id/edtxtLogin" />
 
         <Button
             android:id="@+id/btnLogin"
@@ -55,6 +55,7 @@
             android:textSize="16dp"
             android:text="@string/cadastre_se"
             android:layout_marginTop="15dp"
+            android:clickable="true"
             android:gravity="center"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

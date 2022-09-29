@@ -1,8 +1,10 @@
-package com.example.dragonsushi;
+package com.example.dragonsushi.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.dragonsushi.R;
 
 public class MainActivity extends AppCompatActivity {
 

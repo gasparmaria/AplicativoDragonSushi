@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Activities.MainActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -42,10 +42,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/edtxtNome" />
 
             <EditText
+                android:id="@+id/edtxtCpf"
+                style="@style/editTextRed"
+                android:hint="@string/cpf"
+                app:layout_constraintTop_toBottomOf="@+id/edtxtTelefone" />
+
+            <EditText
                 android:id="@+id/edtxtEmail"
                 style="@style/editTextRed"
                 android:hint="@string/email"
-                app:layout_constraintTop_toBottomOf="@+id/edtxtTelefone" />
+                app:layout_constraintTop_toBottomOf="@+id/edtxtCpf" />
 
             <EditText
                 android:id="@+id/edtxtSenha"
