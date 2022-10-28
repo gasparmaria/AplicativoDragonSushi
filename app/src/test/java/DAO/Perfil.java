@@ -44,21 +44,8 @@ NetworkInfo networkInfo = null;
         getSupportLoaderManager().restartLoader(0, queryBundle, this);
     }
 
-    public void getDataUser(View view) {
-        // Recupera a string de busca.
-        queryString = "/?name=" + nm_personagem.getText().toString();
 
-        // esconde o teclado qdo o botão é clicado
-        InputMethodManager inputManager = (InputMethodManager)
-                getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (inputManager != null) {
-            inputManager.hideSoftInputFromWindow(view.getWindowToken(),
-                    InputMethodManager.HIDE_NOT_ALWAYS);
-        }
 }
-
-
-
 
 
     @NonNull
