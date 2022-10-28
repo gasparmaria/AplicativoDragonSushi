@@ -18,8 +18,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class UserDAO {
-    NetworkUtils networkUtils;
-
     private static final String API_URL = "https://192.168.0.18:45455/api";
 
     @SuppressLint("RestrictedApi")
@@ -34,7 +32,7 @@ public class UserDAO {
                 builtURI = Uri.parse(API_URL).buildUpon().build();
             }
             else {
-                String url1 = API_URL + "/UsuarioApi/ConsultarUsuario/?login=" + queryString;
+                String url1 = API_URL + "/UsuarioApi/ConsultarUsuario" + queryString;
                 builtURI = Uri.parse(url1).buildUpon().build();
             }
             URL requestURL = new URL(builtURI.toString());

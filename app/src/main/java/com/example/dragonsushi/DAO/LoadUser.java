@@ -8,7 +8,7 @@ import androidx.loader.content.AsyncTaskLoader;
 public class LoadUser extends AsyncTaskLoader<String> {
 
     private String mQueryString;
-    LoadUser(Context context, String queryString) {
+    public LoadUser(Context context, String queryString) {
         super(context);
         mQueryString = queryString;
 
@@ -21,8 +21,6 @@ public class LoadUser extends AsyncTaskLoader<String> {
     @Nullable
     @Override
     public String loadInBackground() {
-
-        return NetworkUtils.getData(mQueryString);
+        return UserDAO.getLogin(mQueryString);
     }
-
 }

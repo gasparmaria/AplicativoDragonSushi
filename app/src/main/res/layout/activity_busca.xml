@@ -27,7 +27,6 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textHint="Buscar produto"
             android:textColorHint="@color/gray"/>
 
         <View

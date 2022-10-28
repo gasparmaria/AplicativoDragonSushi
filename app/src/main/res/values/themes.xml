@@ -2,11 +2,11 @@
     <!-- Base application theme. -->
     <style name="Theme.DragonSushi" parent="Theme.MaterialComponents.DayNight.NoActionBar"></style>
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/principal_color</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary" type="color">@color/principal_color</item>
+        <item name="colorOnPrimary" type="color">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/second_color</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary" type="color">@color/second_color</item>
+        <item name="colorOnSecondary" type="color">@color/white</item>
     <style name="Theme.DragonSushi.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

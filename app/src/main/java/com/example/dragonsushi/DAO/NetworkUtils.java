@@ -1,4 +1,4 @@
-package DAO;
+package com.example.dragonsushi.DAO;
 
 import static androidx.core.content.PackageManagerCompat.LOG_TAG;
 
