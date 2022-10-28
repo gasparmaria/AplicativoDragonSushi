@@ -1,13 +1,13 @@
 package com.example.dragonsushi.Objects;
 
-public class Usuario {
+public class User {
 
     private int id, fkPessoa;
     private String login, senha;
 
-    public Usuario(){}
+    public User(){}
 
-    public Usuario(int id, String login, String senha, int fkPessoa){
+    public User(int id, String login, String senha, int fkPessoa){
         this.id = id;
         this.login = login;
         this.senha = senha;
