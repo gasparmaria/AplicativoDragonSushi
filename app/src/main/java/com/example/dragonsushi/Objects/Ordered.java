@@ -1,13 +1,13 @@
 package com.example.dragonsushi.Objects;
 
-public class Pedido {
+public class Ordered {
 
     private int id, quantidade, fkProduto, fkComanda;
     private String descricao;
 
-    public Pedido(){}
+    public Ordered(){}
 
-    public Pedido(int id, int quantidade, String descricao, int fkProduto, int fkComanda){
+    public Ordered(int id, int quantidade, String descricao, int fkProduto, int fkComanda){
         this.id = id;
         this.quantidade = quantidade;
         this.descricao = descricao;

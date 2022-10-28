@@ -1,15 +1,15 @@
 package com.example.dragonsushi.Objects;
 
-public class Produto {
+public class Product {
 
     private int id;
     private byte[] imagem;
     private double preco;
     private String nome, descricao;
 
-    public Produto(){}
+    public Product(){}
 
-    public Produto(int id, String nome, byte[] imagem, String descricao, double preco){
+    public Product(int id, String nome, byte[] imagem, String descricao, double preco){
         this.id = id;
         this.nome = nome;
         this.imagem = imagem;

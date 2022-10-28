@@ -12,13 +12,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
-import com.example.dragonsushi.Objects.Pessoa;
+import com.example.dragonsushi.Objects.Person;
 import com.example.dragonsushi.Objects.User;
 import com.example.dragonsushi.R;
 
 public class Perfil extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String>{
     User user = new User();
-    Pessoa pessoa = new Pessoa();
+    Person person = new Person();
     String queryString;
     public TextView userName, login;
 

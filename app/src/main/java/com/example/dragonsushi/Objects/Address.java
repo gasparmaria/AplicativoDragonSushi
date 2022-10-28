@@ -1,13 +1,13 @@
 package com.example.dragonsushi.Objects;
 
-public class Endereco {
+public class Address {
 
     private int id;
     private String numero, descricao, rua, bairro, cidade, estado;
 
-    public Endereco(){ }
+    public Address(){ }
 
-    public Endereco(int id, String numero, String descricao, String rua, String bairro, String cidade, String estado){
+    public Address(int id, String numero, String descricao, String rua, String bairro, String cidade, String estado){
         this.id = id;
         this.numero = numero;
         this.descricao = descricao;

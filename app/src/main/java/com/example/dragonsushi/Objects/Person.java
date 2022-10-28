@@ -1,13 +1,13 @@
 package com.example.dragonsushi.Objects;
 
-public class Pessoa {
+public class Person {
 
     private int id;
     private String nome, telefone, cpf;
 
-    public Pessoa(){}
+    public Person(){}
 
-    public Pessoa(int id, String nome, String telefone, String cpf){
+    public Person(int id, String nome, String telefone, String cpf){
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
