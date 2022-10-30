@@ -17,7 +17,7 @@ import com.example.dragonsushi.Objects.User;
 import com.example.dragonsushi.R;
 
 public class Perfil extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String>{
-    User user = new User();
+
     Person person = new Person();
     String queryString;
     public TextView userName, login;

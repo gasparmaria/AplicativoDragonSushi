@@ -1,48 +1,57 @@
 package com.example.dragonsushi.Objects;
 
+import java.util.List;
+
 public class User {
 
-    private int id, fkPessoa;
-    private String login, senha;
+    int idUsuario;
+    int fkPessoa;
+    String login;
+    String senha;
 
-    public User(){}
 
-    public User(int id, String login, String senha, int fkPessoa){
-        this.id = id;
+    public User(Integer idUsuario, Integer fkPessoa, String login, String senha) {
+        this.idUsuario = idUsuario;
+        this.fkPessoa = fkPessoa;
         this.login = login;
         this.senha = senha;
-        this.fkPessoa = fkPessoa;
     }
 
-    public int getId() {
-        return id;
+    public User() {
+
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
-    public int getFkPessoa() {
+    public Integer getFkPessoa() {
         return fkPessoa;
-    }
-
-    public void setFkPessoa(int fkPessoa) {
-        this.fkPessoa = fkPessoa;
     }
 
     public String getLogin() {
         return login;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
     public String getSenha() {
         return senha;
+    }
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public void setFkPessoa(Integer fkPessoa) {
+        this.fkPessoa = fkPessoa;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+
 }
