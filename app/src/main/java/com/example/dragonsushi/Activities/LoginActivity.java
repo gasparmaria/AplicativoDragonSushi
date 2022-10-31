@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity  {
     EditText edtxtLogin, edtxtSenha;
     Button btnLogin;
     TextView txtCadastro;
-    String url = "https://greatredbike29.conveyor.cloud/api/UsuarioApi/ConsultarUsuario?login=gerente";
+    String url = "https://greatpurplemouse98.conveyor.cloud/api/UsuarioApi/ConsultarUsuario?login=gerente";
     User allUserList;
 
     @Override
@@ -65,16 +65,19 @@ public class LoginActivity extends AppCompatActivity  {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            JSONObject jsonObject = new JSONObject();
-                                JSONObject singleObject = jsonObject.getJSONObject(response);
+                            JSONObject jsonObject = new JSONObject(response);
+                                 JSONObject user = jsonObject.getJSONObject("Usuario");
                                 User singleUser = new User(
-                                        singleObject.getInt("idUsuario"),
-                                        singleObject.getInt("fkPessoa"),
-                                        singleObject.getString("login"),
-                                        singleObject.getString("senha"));
+                                        user.getInt("idUsuario"),
+                                        user.getInt("fkPessoa"),
+                                        user.getString("login"),
+                                        user.getString("senha"));
+
+                                edtxtLogin.setText(singleUser.getLogin());
+                                edtxtSenha.setText(singleUser.getSenha());
 
                             Log.e("url","SucessMesage:");
-                            } catch (JSONException jsonException) {
+                        } catch (JSONException jsonException) {
                             jsonException.printStackTrace();
                             Log.e("url", "onCatch Response: NN FOIIIII");
                         }
