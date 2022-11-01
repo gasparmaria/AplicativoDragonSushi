@@ -1,5 +1,6 @@
 package com.example.dragonsushi.Activities;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -9,13 +10,30 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.dragonsushi.R;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Map;
 
 public class CadastroActivity extends AppCompatActivity {
 
     EditText edtxtNome, edtxtTelefone, edtxtCpf, edtxtEmail, edtxtSenha, edtxtConfSenha;
     Button btnCadastrar;
     String nome, telefone, cpf, email, senha, confirmar;
+    String url = "https://rightsparklyhen73.conveyor.cloud/api/UsuarioApi/Post";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,5 +115,53 @@ public class CadastroActivity extends AppCompatActivity {
         outState.putString("email", email);
         outState.putString("senha", senha);
         outState.putString("confirmar", confirmar);
+    }
+
+    private void postDataUser() {
+        // url to post our data
+        String url = "https://rightsparklyhen73.conveyor.cloud/api/UsuarioApi/Post";
+        RequestQueue queue = Volley.newRequestQueue(CadastroActivity.this);
+
+        StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONArray jsonArray = null;
+                try {
+
+                    jsonArray = new JSONArray(response);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                JsonObject jsonObject = new JsonObject();
+                JSONArray array;
+
+                try {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject user = jsonArray.getJSONObject(i);
+                        String login = user.getString("login");
+                        String senha = user.getString("senha");
+                        JSONObject person = jsonArray.getJSONObject(i);
+                        String nomePessoa = person.getString("nomePessoa");
+                        String telefone = person.getString("telefone");
+                        String cpf = person.getString("cpf");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+    }{
+       /* @Override
+                protected Map<String, String> getParams(){
+
+        }*/
+
     }
 }

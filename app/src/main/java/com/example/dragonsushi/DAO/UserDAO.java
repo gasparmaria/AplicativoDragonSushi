@@ -1,18 +1,8 @@
 package com.example.dragonsushi.DAO;
 
-import com.example.dragonsushi.Objects.User;
+import android.database.Cursor;
 
-import java.util.List;
+public class UserDAO {
 
-import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
+    }
 
-public interface UserDAO {
-    String BASE_URL = "";
-
-    @GET("api/UsuarioApi/ConsultarUsuario")
-    Call<User> getAllData(
-            @Query("login") String login
-    );
-}
