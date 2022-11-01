@@ -26,6 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class CadastroActivity extends AppCompatActivity {
@@ -57,6 +58,7 @@ public class CadastroActivity extends AppCompatActivity {
             confirmar = String.valueOf(edtxtConfSenha.getText());
 
             validarCampos();
+            postDataUser();
 
         });
     }
@@ -119,7 +121,7 @@ public class CadastroActivity extends AppCompatActivity {
 
     private void postDataUser() {
         // url to post our data
-        String url = "https://rightsparklyhen73.conveyor.cloud/api/UsuarioApi/Post";
+        String url = "https://rightsparklyhen73.conveyor.cloud/api/";
         RequestQueue queue = Volley.newRequestQueue(CadastroActivity.this);
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
@@ -156,12 +158,23 @@ public class CadastroActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
             }
-        });
-    }{
-       /* @Override
-                protected Map<String, String> getParams(){
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("nomePessoa", edtxtNome.getText().toString());
+                params.put("telefone", edtxtTelefone.getText().toString());
+                params.put("cpf", edtxtCpf.getText().toString());
+                params.put("login", edtxtEmail.getText().toString());
+                params.put("senha", edtxtSenha.getText().toString());
+                return params;
 
-        }*/
+            }
+        };
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(request);
 
     }
+
 }
+
