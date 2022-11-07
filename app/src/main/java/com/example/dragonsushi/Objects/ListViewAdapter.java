@@ -7,14 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.dragonsushi.Activities.ProductActivity;
 import com.example.dragonsushi.R;
+import com.example.dragonsushi.Objects.Product;
 
 import java.util.List;
+import java.io.Serializable;
 
 public class ListViewAdapter extends BaseAdapter {
     private final int layout;
@@ -68,9 +71,9 @@ public class ListViewAdapter extends BaseAdapter {
 
         Product product = productList.get(position);
 
-        row.setOnClickListener(v - {
+        row.setOnClickListener(v ->{
             Intent intent = new Intent(context, ProductActivity.class);
-            intent.putExtra("Produto", product);
+            intent.putExtra("Produto", (Serializable) product);
             context.startActivity(intent);
         });
 
