@@ -15,19 +15,22 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dragonsushi.Objects.Product;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoriaActivity extends AppCompatActivity {
-
+    ArrayList<String> stringArrayList;
     List<Product> productList;
     ListView listViewProduct;
     String PARAMETER = "fkCategoria";
-    String url = "https://othersparklyapple84.conveyor.cloud/api/ProdutoApi/ConsultarCategoria";
+    String url = "https://longtanbox49.conveyor.cloud/api/ProdutoApi/ConsultarCategoria";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +42,6 @@ public class CategoriaActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String category = intent.getStringExtra("Categoria");
 
-        RequestQueue queue = Volley.newRequestQueue(this);
         Uri builtUri = Uri.parse(url).buildUpon().appendQueryParameter(PARAMETER, category).build();
         String builtUrl = builtUri.toString();
 
@@ -47,18 +49,24 @@ public class CategoriaActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Gson gson = new GsonBuilder().create();
 
-                        try {
+                        if(response != null){
+                            JSONObject json = null;
 
-                            JSONObject jsonObject = new JSONObject(response);
-                            JSONArray array = jsonObject.getJSONArray("Produto");
+                            try{
+                                json = new JSONObject(response);
+                                JSONArray jsonArray = json.getJSONArray("Produto");
+                                stringArrayList = new ArrayList<>();
+                                for(int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                    stringArrayList.add(String.valueOf(jsonObject));
+                                }
 
-
-                        } catch (JSONException jsonException) {
-                            jsonException.printStackTrace();
-                            Log.e("url", "onCatch Response: NN FOIIIII");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
-
                     }
                 }, new Response.ErrorListener() {
             @Override
