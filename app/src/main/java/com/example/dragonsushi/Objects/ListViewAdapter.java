@@ -25,9 +25,9 @@ import java.io.Serializable;
 public class ListViewAdapter extends BaseAdapter {
     private final int layout;
     private final Context context;
-    List<Product> productList;
+    List<Product> productList = new ArrayList<Product>();
 
-    public ListViewAdapter(CategoriaActivity context, int layout, List<Product> product1) {
+    public ListViewAdapter(Context context, int layout, List<Product> product1) {
         this.context = context;
         this.layout = layout;
         this.productList = product1;
@@ -75,7 +75,7 @@ public class ListViewAdapter extends BaseAdapter {
 
         Product product1 = productList.get(position);
 
-        holder.constrait.setOnClickListener(v ->{
+        row.setOnClickListener(v ->{
             Intent intent = new Intent(context, CategoriaActivity.class);
             intent.putExtra("Produto", (Serializable) product1);
             context.startActivity(intent);
@@ -83,6 +83,7 @@ public class ListViewAdapter extends BaseAdapter {
 
         holder.txtProductName.setText(product1.getNome());
         holder.txtProductDescr.setText(product1.getDescricao());
+        holder.txtProductPrice.setText(Double.toString(product1.getPreco()));
 
         return row;
     }
