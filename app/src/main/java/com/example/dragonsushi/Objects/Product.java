@@ -1,6 +1,8 @@
 package com.example.dragonsushi.Objects;
 
-public class Product {
+import org.json.JSONArray;
+
+public class Product extends JSONArray {
 
     private int id;
     private byte[] imagem;

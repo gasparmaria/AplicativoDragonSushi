@@ -2,20 +2,23 @@ package com.example.dragonsushi.Objects;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Toast;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.Response;
+import com.example.dragonsushi.Activities.CategoriaActivity;
 import com.example.dragonsushi.Activities.ProductActivity;
 import com.example.dragonsushi.R;
-import com.example.dragonsushi.Objects.Product;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
 
@@ -24,10 +27,10 @@ public class ListViewAdapter extends BaseAdapter {
     private final Context context;
     List<Product> productList;
 
-    public ListViewAdapter(Context context, int layout, List<Product> productList) {
-        this.layout = layout;
+    public ListViewAdapter(CategoriaActivity context, int layout, List<Product> product1) {
         this.context = context;
-        this.productList = productList;
+        this.layout = layout;
+        this.productList = product1;
     }
 
     @Override
@@ -48,12 +51,13 @@ public class ListViewAdapter extends BaseAdapter {
     private class ViewHolder {
         TextView txtProdutcId, txtProductName, txtProductDescr, txtProductPrice;
         ImageView imgProduct;
+        LinearLayout constrait;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
-        ListViewAdapter.ViewHolder holder = new ListViewAdapter.ViewHolder();
+        ViewHolder holder = new ViewHolder();
 
         if(row == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -69,16 +73,16 @@ public class ListViewAdapter extends BaseAdapter {
             holder = (ViewHolder) row.getTag();
         }
 
-        Product product = productList.get(position);
+        Product product1 = productList.get(position);
 
-        row.setOnClickListener(v ->{
-            Intent intent = new Intent(context, ProductActivity.class);
-            intent.putExtra("Produto", (Serializable) product);
+        holder.constrait.setOnClickListener(v ->{
+            Intent intent = new Intent(context, CategoriaActivity.class);
+            intent.putExtra("Produto", (Serializable) product1);
             context.startActivity(intent);
         });
 
-        holder.txtProductName.setText(product.getNome());
-        holder.txtProductDescr.setText(product.getDescricao());
+        holder.txtProductName.setText(product1.getNome());
+        holder.txtProductDescr.setText(product1.getDescricao());
 
         return row;
     }

@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView txtCadastro;
     String login, senha;
     String PARAMETER = "login";
-    String url = "https://longtanbox49.conveyor.cloud/api/UsuarioApi/ConsultarUsuario";
+    String url = "https://192.168.0.30:45455/api/UsuarioApi/ConsultarUsuario";
 
 
     @Override
@@ -106,12 +106,6 @@ public class LoginActivity extends AppCompatActivity {
         });
         queue.add(stringRequest);
     }
-
-
-
-
-
-
 
 
         private boolean campoNulo (String campo){
