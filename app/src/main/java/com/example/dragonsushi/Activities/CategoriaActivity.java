@@ -3,6 +3,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,17 +23,40 @@ import java.util.List;
 public class CategoriaActivity extends AppCompatActivity {
     private List<Product> productList = new ArrayList<Product>();
     ListView listViewProduct;
+    TextView categoria;
     String PARAMETER = "fkCategoria";
     String url = "https://bigreddog64.conveyor.cloud/api/ProdutoApi/ConsultarCategoria";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categoria);
+        categoria = findViewById(R.id.txtCategoria);
         getCategoria();
     }
     private void getCategoria(){
         Intent intent = getIntent();
         String category = intent.getStringExtra("Categoria");
+        switch (category){
+            case "1":
+                categoria.setText("Entradas");
+                break;
+            case "2":
+                categoria.setText("Pratos Quentes");
+                break;
+            case "3":
+                categoria.setText("Temakis");
+                break;
+            case "4":
+                categoria.setText("Peças");
+                break;
+            case "5":
+                categoria.setText("Combos");
+                break;
+            case "6":
+                categoria.setText("Bebidas");
+                break;
+        }
+
         Uri builtUri = Uri.parse(url).buildUpon().appendQueryParameter(PARAMETER, category).build();
         String builtUrl = builtUri.toString();
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -51,6 +76,7 @@ public class CategoriaActivity extends AppCompatActivity {
                                 product1.setPreco(prod.getDouble("preco"));
                                 productList.add(product1);
                             }
+
                             ListViewAdapter adapter = new ListViewAdapter(getApplicationContext(),R.layout.listview_produto, productList);
                             listViewProduct = findViewById(R.id.listviewCategoria);
                             listViewProduct.setAdapter(adapter);
