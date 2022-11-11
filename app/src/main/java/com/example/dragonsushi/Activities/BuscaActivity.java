@@ -2,6 +2,8 @@ package com.example.dragonsushi.Activities;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -26,22 +28,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BuscaActivity extends AppCompatActivity {
-    SearchView busca;
+    ImageButton btnSearch;
+    EditText edtxtSearch;
     String PARAMETER = "nomeProd";
-    String url = "https://192.168.0.30:45455/api/ProdutoApi/ConsultarCardapio";
+    String url = "https://lastgreyphone1.conveyor.cloud/api/ProdutoApi/ConsultarCardapio";
     private List<Product> productList = new ArrayList<Product>();
     ListView listViewProduct;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_busca);
-        busca = findViewById(R.id.seachProduto);
+
+        btnSearch = findViewById(R.id.btnSearch);
+        edtxtSearch = findViewById(R.id.edtxtSearch);
+
+        btnSearch.setOnClickListener(v ->{
+
+        });
         getProd();
     }
     private void getProd(){
 
-        CharSequence getBusca = busca.getQuery();
-        Uri builtUri = Uri.parse(url).buildUpon().appendQueryParameter(PARAMETER, String.valueOf(getBusca)).build();
+
+        Uri builtUri = Uri.parse(url).buildUpon().appendQueryParameter(PARAMETER, String.valueOf(edtxtSearch)).build();
         String builtUrl = builtUri.toString();
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, builtUrl,

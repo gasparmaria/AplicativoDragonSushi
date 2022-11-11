@@ -2,7 +2,9 @@ package com.example.dragonsushi.Objects;
 
 import org.json.JSONArray;
 
-public class Product extends JSONArray {
+import java.io.Serializable;
+
+public class Product extends JSONArray implements Serializable {
 
     private int id;
     private byte[] imagem;
