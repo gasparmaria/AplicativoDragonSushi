@@ -2,6 +2,7 @@ package com.example.dragonsushi.Objects;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.example.dragonsushi.Activities.CategoriaActivity;
+import com.example.dragonsushi.Activities.DetalhesActivity;
 import com.example.dragonsushi.Activities.ProductActivity;
 import com.example.dragonsushi.R;
 
@@ -49,7 +51,8 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     private class ViewHolder {
-        TextView txtProdutcId, txtProductName, txtProductDescr, txtProductPrice;
+        View itemlist;
+        TextView txtProductName, txtProductDescr, txtProductPrice;
         ImageView imgProduct;
         LinearLayout constrait;
     }
@@ -75,9 +78,11 @@ public class ListViewAdapter extends BaseAdapter {
 
         Product product1 = productList.get(position);
 
-        row.setOnClickListener(v ->{
-            Intent intent = new Intent(context, CategoriaActivity.class);
-            intent.putExtra("Produto", (Serializable) product1);
+        View item = holder.itemlist;
+        item = row.findViewById(R.id.linearLayout2);
+        item.setOnClickListener(v ->{
+            Intent intent = new Intent(context, DetalhesActivity.class);
+            intent.putExtra("Product", (Serializable) product1);
             context.startActivity(intent);
         });
 

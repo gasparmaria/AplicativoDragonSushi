@@ -57,4 +57,12 @@
     <string name="senha_">SENHA</string>
     <string name="login_">LOGIN</string>
     <string name="cpf">CPF</string>
+    <string name="entradas">Entradas</string>
+    <string name="pratos_quentes">Pratos Quentes</string>
+    <string name="temakis">Temakis</string>
+    <string name="pecas">Peças</string>
+    <string name="bebidas">Bebidas</string>
+    <string name="combos">Combos</string>
+    <string name="rs">R$</string>
+    <string name="subtotal_">\"Subtotal: \"</string>
 </resources>
