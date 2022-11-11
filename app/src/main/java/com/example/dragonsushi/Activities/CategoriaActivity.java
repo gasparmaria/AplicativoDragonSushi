@@ -24,7 +24,7 @@ public class CategoriaActivity extends AppCompatActivity {
     ListView listViewProduct;
     TextView categoria;
     String PARAMETER = "fkCategoria";
-    String url = "https://bigreddog64.conveyor.cloud/api/ProdutoApi/ConsultarCategoria";
+    String url = "https://192.168.0.30:45455/api/ProdutoApi/ConsultarCategoria";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
