@@ -35,6 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
+                android:layout_marginRight="90dp"
                 app:srcCompat="@drawable/ic_searchview"/>
 
             <EditText
@@ -42,7 +43,8 @@
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
-                android:paddingBottom="0dp"/>
+                android:paddingBottom="0dp"
+                android:textColor="@color/black" />
 
         </LinearLayout>
 
@@ -68,7 +70,7 @@
                 <ListView
                     android:id="@+id/listviewBusca"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="520dp" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

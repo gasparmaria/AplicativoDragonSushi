@@ -1,7 +1,9 @@
 package com.example.dragonsushi.Activities;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -31,7 +33,7 @@ public class BuscaActivity extends AppCompatActivity {
     ImageButton btnSearch;
     EditText edtxtSearch;
     String PARAMETER = "nomeProd";
-    String url = "https://lastgreyphone1.conveyor.cloud/api/ProdutoApi/ConsultarCardapio";
+    String url = "https://widebrassgrape69.conveyor.cloud/api/ProdutoApi/ConsultarCardapio";
     private List<Product> productList = new ArrayList<Product>();
     ListView listViewProduct;
     @Override
@@ -43,15 +45,18 @@ public class BuscaActivity extends AppCompatActivity {
         btnSearch = findViewById(R.id.btnSearch);
         edtxtSearch = findViewById(R.id.edtxtSearch);
 
+        listViewProduct = findViewById(R.id.listviewBusca);
+
+
         btnSearch.setOnClickListener(v ->{
+            getProd();
 
         });
-        getProd();
     }
     private void getProd(){
 
-
-        Uri builtUri = Uri.parse(url).buildUpon().appendQueryParameter(PARAMETER, String.valueOf(edtxtSearch)).build();
+        productList.clear();
+        Uri builtUri = Uri.parse(url).buildUpon().appendQueryParameter(PARAMETER, edtxtSearch.getText().toString()).build();
         String builtUrl = builtUri.toString();
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, builtUrl,
@@ -63,14 +68,17 @@ public class BuscaActivity extends AppCompatActivity {
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject objt = response.getJSONObject(i);
                                 JSONObject prod = objt.getJSONObject("Produto");
+
                                 Product product1 = new Product();
+
                                 product1.setId(prod.getInt("idProd"));
                                 product1.setNome(prod.getString("nomeProd"));
                                 product1.setDescricao(prod.getString("descrProd"));
                                 product1.setPreco(prod.getDouble("preco"));
-                                productList.add(product1);
-                            }
 
+                                productList.add(product1);
+
+                            }
                             ListViewAdapter adapter = new ListViewAdapter(getApplicationContext(),R.layout.listview_produto, productList);
                             listViewProduct = findViewById(R.id.listviewBusca);
                             listViewProduct.setAdapter(adapter);
@@ -81,7 +89,7 @@ public class BuscaActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //Toast.makeText(MainActivity.this, "Fail to get the data..", Toast.LENGTH_SHORT).show();
+
             }
         });
         queue.add(jsonArrayRequest);

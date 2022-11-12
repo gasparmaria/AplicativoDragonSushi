@@ -24,7 +24,7 @@ public class DetalhesActivity extends AppCompatActivity {
     int qtd = 0;
     double price, subtotal;
     String PARAMETER = "nomeProd";
-    String url = "https://lastgreyphone1.conveyor.cloud/api/ProdutoApi/ConsultarCardapio";
+    String url = "https://widebrassgrape69.conveyor.cloud/api/ProdutoApi/ConsultarCardapio";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

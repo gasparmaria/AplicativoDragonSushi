@@ -27,7 +27,7 @@ public class CategoriaActivity extends AppCompatActivity {
     ListView listViewProduct;
     TextView categoria;
     String PARAMETER = "fkCategoria";
-    String url = "https://lastgreyphone1.conveyor.cloud/api/ProdutoApi/ConsultarCategoria";
+    String url = "https://widebrassgrape69.conveyor.cloud/api/ProdutoApi/ConsultarCategoria";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
