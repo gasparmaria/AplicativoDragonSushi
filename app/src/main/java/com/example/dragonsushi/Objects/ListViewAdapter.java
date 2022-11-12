@@ -2,6 +2,7 @@ package com.example.dragonsushi.Objects;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.example.dragonsushi.Activities.CategoriaActivity;
+import com.example.dragonsushi.Activities.DetalhesActivity;
 import com.example.dragonsushi.Activities.ProductActivity;
 import com.example.dragonsushi.R;
 
@@ -49,7 +51,8 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     private class ViewHolder {
-        TextView txtProdutcId, txtProductName, txtProductDescr, txtProductPrice;
+        View itemlist;
+        TextView txtProductName, txtProductDescr, txtProductPrice;
         ImageView imgProduct;
         LinearLayout constrait;
     }
@@ -63,6 +66,7 @@ public class ListViewAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(layout, null);
 
+            holder.constrait = row.findViewById(R.id.linearLayout2);
             holder.txtProductName = row.findViewById(R.id.txtNomeProduto);
             holder.txtProductDescr = row.findViewById(R.id.txtDescrProduto);
             holder.txtProductPrice = row.findViewById(R.id.txtPrecoProduto);
@@ -75,15 +79,16 @@ public class ListViewAdapter extends BaseAdapter {
 
         Product product1 = productList.get(position);
 
-        row.setOnClickListener(v ->{
-            Intent intent = new Intent(context, CategoriaActivity.class);
-            intent.putExtra("Produto", (Serializable) product1);
+        holder.constrait.setOnClickListener(v ->{
+            Intent intent = new Intent(context, DetalhesActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("Product", product1);
             context.startActivity(intent);
         });
 
         holder.txtProductName.setText(product1.getNome());
         holder.txtProductDescr.setText(product1.getDescricao());
-        holder.txtProductPrice.setText(Double.toString(product1.getPreco()));
+        holder.txtProductPrice.setText(new StringBuilder().append("R$").append(Double.toString(product1.getPreco())).toString());
 
         return row;
     }
