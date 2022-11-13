@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.dragonsushi.Objects.Product;
 import com.example.dragonsushi.R;
 
@@ -23,8 +24,6 @@ public class DetalhesActivity extends AppCompatActivity {
     EditText edtxtObs;
     int qtd = 0;
     double price, subtotal;
-    String PARAMETER = "nomeProd";
-    String url = "https://widebrassgrape69.conveyor.cloud/api/ProdutoApi/ConsultarCardapio";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +57,7 @@ public class DetalhesActivity extends AppCompatActivity {
         txtName.setText(product.getNome());
         txtDescr.setText(product.getDescricao());
         txtPrice.setText(new StringBuilder().append(getString(R.string.rs)).append(String.valueOf(product.getPreco())));
+        Glide.with(this).load(product.getImagem()).into(imgProduct);
 
         price = product.getPreco();
         btnMore.setOnClickListener(v ->{

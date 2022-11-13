@@ -33,7 +33,7 @@ public class BuscaActivity extends AppCompatActivity {
     ImageButton btnSearch;
     EditText edtxtSearch;
     String PARAMETER = "nomeProd";
-    String url = "https://widebrassgrape69.conveyor.cloud/api/ProdutoApi/ConsultarCardapio";
+    String url = "https://longsagecard29.conveyor.cloud/api/ProdutoApi/ConsultarCardapio";
     private List<Product> productList = new ArrayList<Product>();
     ListView listViewProduct;
     @Override
@@ -75,6 +75,7 @@ public class BuscaActivity extends AppCompatActivity {
                                 product1.setNome(prod.getString("nomeProd"));
                                 product1.setDescricao(prod.getString("descrProd"));
                                 product1.setPreco(prod.getDouble("preco"));
+                                product1.setImagem(prod.getString("imgProd"));
 
                                 productList.add(product1);
 

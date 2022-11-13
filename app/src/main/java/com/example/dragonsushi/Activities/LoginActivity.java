@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView txtCadastro;
     String login, senha;
     String PARAMETER = "login";
-    String url = "https://widebrassgrape69.conveyor.cloud/api/UsuarioApi/ConsultarUsuario";
+    String url = "https://longsagecard29.conveyor.cloud/api/UsuarioApi/ConsultarUsuario";
 
 
     @Override

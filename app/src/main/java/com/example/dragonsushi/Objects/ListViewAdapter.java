@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Response;
+import com.bumptech.glide.Glide;
 import com.example.dragonsushi.Activities.CategoriaActivity;
 import com.example.dragonsushi.Activities.DetalhesActivity;
 import com.example.dragonsushi.Activities.ProductActivity;
@@ -71,6 +72,7 @@ public class ListViewAdapter extends BaseAdapter {
             holder.txtProductDescr = row.findViewById(R.id.txtDescrProduto);
             holder.txtProductPrice = row.findViewById(R.id.txtPrecoProduto);
             holder.imgProduct = row.findViewById(R.id.imgProduto);
+            Glide.with(context).load(productList.get(position).getImagem()).into(holder.imgProduct);
             row.setTag(holder);
         }
         else{

@@ -7,13 +7,13 @@ import java.io.Serializable;
 public class Product extends JSONArray implements Serializable {
 
     private int id;
-    private byte[] imagem;
+    private String imagem;
     private double preco;
     private String nome, descricao;
 
     public Product(){}
 
-    public Product(int id, String nome, byte[] imagem, String descricao, double preco){
+    public Product(int id, String nome, String imagem, String descricao, double preco){
         this.id = id;
         this.nome = nome;
         this.imagem = imagem;
@@ -29,11 +29,11 @@ public class Product extends JSONArray implements Serializable {
         this.id = id;
     }
 
-    public byte[] getImagem() {
+    public String getImagem() {
         return imagem;
     }
 
-    public void setImagem(byte[] imagem) {
+    public void setImagem(String imagem) {
         this.imagem = imagem;
     }
 

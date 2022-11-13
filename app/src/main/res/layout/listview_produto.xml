@@ -44,7 +44,8 @@
 
             <ImageView
                 android:id="@+id/imgProduto"
-                android:layout_width="100dp"
+                android:scaleType="centerCrop"
+                android:layout_width="90dp"
                 android:layout_height="100dp"
                 android:background="@color/gray_light" />
         </LinearLayout>
