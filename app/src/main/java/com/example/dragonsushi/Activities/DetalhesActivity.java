@@ -22,8 +22,8 @@ public class DetalhesActivity extends AppCompatActivity {
     Button btnAdd;
     TextView txtName, txtDescr, txtPrice, txtQntd, txtSubtotal;
     EditText edtxtObs;
-    int qtd = 0;
     double price, subtotal;
+    Integer counter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,17 +60,26 @@ public class DetalhesActivity extends AppCompatActivity {
         Glide.with(this).load(product.getImagem()).into(imgProduct);
 
         price = product.getPreco();
+
+        counter = 0;
         btnMore.setOnClickListener(v ->{
-            qtd++;
-            txtQntd.setText(qtd);
-            subtotal = price * qtd;
-            txtSubtotal.setText(new StringBuilder().append(R.string.subtotal_).append(String.valueOf(subtotal)));
+            counter++;
+            price = updateCounter(price);
         });
         btnLess.setOnClickListener(v ->{
-            qtd--;
-            txtQntd.setText(qtd);
-            subtotal = price * qtd;
-            txtSubtotal.setText(new StringBuilder().append(R.string.subtotal_).append(String.valueOf(subtotal)));
+            counter--;
+            price = updateCounter(price);
         });
+
+
+
+    }
+
+    private double updateCounter(double price){
+        txtQntd.setText(counter.toString());
+        subtotal = price * counter;
+        txtSubtotal.setText(String.format("Subtotal: R$%.2f", subtotal));
+
+        return subtotal;
     }
 }

@@ -106,9 +106,10 @@
                 <TextView
                     android:id="@+id/txtQuantidade"
                     style="@style/textviewblack"
-                    android:layout_width="wrap_content"
-                    android:layout_marginHorizontal="10dp"
+                    android:layout_width="35dp"
+                    android:layout_marginHorizontal="15dp"
                     android:text="@string/_0"
+                    android:gravity="center"
                     android:textSize="20dp" />
 
                 <ImageButton
@@ -122,12 +123,11 @@
                 android:id="@+id/txtSubtotal"
                 style="@style/textviewgray3"
                 android:layout_width="wrap_content"
-                android:layout_above="@+id/btnAdicionar"
                 android:layout_alignParentEnd="true"
-                android:layout_marginBottom="10dp"
+                android:layout_alignParentBottom="true"
                 android:text="@string/subtotal_000" />
 
-            <Button
+            <!--<Button
                 android:id="@+id/btnAdicionar"
                 style="@style/buttonAdicionar"
                 android:layout_alignParentEnd="true"
@@ -135,7 +135,7 @@
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="0dp"
                 android:text="@string/adicionar_ao_carrinho"
-                android:textAllCaps="false" />
+                android:textAllCaps="false" />-->
         </RelativeLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
