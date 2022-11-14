@@ -17,6 +17,11 @@ public class User {
         this.senha = senha;
     }
 
+    public User(String login, String senha) {
+        this.login = login;
+        this.senha = senha;
+    }
+
     public User() {
 
     }
