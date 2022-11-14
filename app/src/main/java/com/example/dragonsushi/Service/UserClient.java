@@ -9,6 +9,6 @@ import retrofit.http.POST;
 
 public interface UserClient {
 
-    @POST("client")
+    @POST("/Post")
     Call<Client> createAccount(@Body Client client);
 }
