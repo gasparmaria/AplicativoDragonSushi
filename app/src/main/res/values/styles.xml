@@ -4,6 +4,7 @@
         <item name="colorPrimary">@color/principal_color</item>
         <item name="colorPrimaryDark">@color/white</item>
         <item name="colorAccent">@color/gray</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
