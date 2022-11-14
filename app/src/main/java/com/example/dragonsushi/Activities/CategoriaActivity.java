@@ -1,10 +1,7 @@
 package com.example.dragonsushi.Activities;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,22 +13,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
-import com.example.dragonsushi.Objects.ListViewAdapter;
+import com.example.dragonsushi.Adapters.ListViewAdapter;
 import com.example.dragonsushi.Objects.Product;
 import com.example.dragonsushi.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class CategoriaActivity extends AppCompatActivity {
     private List<Product> productList = new ArrayList<Product>();

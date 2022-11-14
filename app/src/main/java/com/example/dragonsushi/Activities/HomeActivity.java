@@ -7,7 +7,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.dragonsushi.Adapters.MenuFragment;
 import com.example.dragonsushi.R;
 
 public class HomeActivity extends AppCompatActivity {
@@ -19,6 +22,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_home);
+        displayFragment();
 
         btnEntradas = findViewById(R.id.btnEntradas);
         btnPratosQuentes = findViewById(R.id.btnPratosQuentes);
@@ -27,11 +31,6 @@ public class HomeActivity extends AppCompatActivity {
         btnCombos = findViewById(R.id.btnCombos);
         btnBebidas = findViewById(R.id.btnBebidas);
         search = findViewById(R.id.menu_search);
-
-        search.setOnClickListener(v -> {
-            Intent intent = new Intent(this, BuscaActivity.class);
-            startActivity(intent);
-        });
 
         btnEntradas.setOnClickListener(v -> {
             Intent intent = new Intent(this, CategoriaActivity.class);
@@ -68,5 +67,18 @@ public class HomeActivity extends AppCompatActivity {
             intent.putExtra("Categoria", "6");
             startActivity(intent);
         });
+    }
+
+    public void displayFragment() {
+        // Instancia o fragmento
+        MenuFragment menuFragment = MenuFragment.newInstance();
+        // Obtem o gerenciado do fragmento e inicia a transação
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager
+                .beginTransaction();
+
+        // Adiciona o fragmento.
+        fragmentTransaction.add(R.id.bottom_menu,
+                menuFragment).addToBackStack(null).commit();
     }
 }

@@ -123,27 +123,27 @@
             <TextView
                 style="@style/title2"
                 android:text="@string/pagamento"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"/>
 
             <TextView
                 android:id="@+id/txtFormaPagto"
                 style="@style/textviewred"
                 android:text="@string/selecione_a_forma_de_pagamento"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"/>
 
             <TextView
                 style="@style/title2"
                 android:text="@string/entrega"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"/>
 
             <TextView
                 android:id="@+id/txtEntrega"
                 style="@style/textviewred"
                 android:text="@string/selecione_o_endere_o_de_entrega"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"/>
         </LinearLayout>
 

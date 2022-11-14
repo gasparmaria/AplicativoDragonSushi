@@ -1,4 +1,4 @@
-package com.example.dragonsushi.Objects;
+package com.example.dragonsushi.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.dragonsushi.Activities.CategoriaActivity;
 import com.example.dragonsushi.Activities.DetalhesActivity;
 import com.example.dragonsushi.Activities.ProductActivity;
+import com.example.dragonsushi.Objects.Product;
 import com.example.dragonsushi.R;
 
 import org.json.JSONArray;
