@@ -1,6 +1,8 @@
 package com.example.dragonsushi.Objects;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
 
     private int id;
     private String nome, telefone, cpf;

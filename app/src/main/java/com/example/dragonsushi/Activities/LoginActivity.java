@@ -19,13 +19,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.dragonsushi.Objects.Person;
 import com.example.dragonsushi.Objects.User;
 import com.example.dragonsushi.R;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Objects;
@@ -36,9 +39,9 @@ public class LoginActivity extends AppCompatActivity {
     EditText edtxtLogin, edtxtSenha;
     Button btnLogin;
     TextView txtCadastro;
-    String login, senha;
+    String login, senha, nomePessoa;
     String PARAMETER = "login";
-    String url = "https://lostashpen80.conveyor.cloud/api/UsuarioApi/ConsultarUsuario";
+    String url = "https://fastaquapencil65.conveyor.cloud/api/UsuarioApi/ConsultarUsuario";
 
 
     @Override
@@ -83,12 +86,18 @@ public class LoginActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
 
                             JSONObject user = jsonObject.getJSONObject("Usuario");
+                            JSONObject person = jsonObject.getJSONObject("Pessoa");
 
                             login = user.getString("login");
                             senha = user.getString("senha");
 
                             if ((edtxtLogin.getText().toString()).equals(login) && (edtxtSenha.getText().toString()).equals(senha)) {
+                                Gson gson = new Gson();
+                                User user1 = gson.fromJson(user.toString(),User.class);
+                                Person person1 = gson.fromJson(person.toString(),Person.class);
                                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                                Intent intent2 = new Intent(getApplicationContext(), PerfilActivity.class);
+                                intent.putExtra("User", user1);
                                 startActivity(intent);
                             } else {
                                 message();

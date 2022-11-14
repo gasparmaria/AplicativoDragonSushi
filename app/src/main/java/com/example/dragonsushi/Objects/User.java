@@ -1,8 +1,9 @@
 package com.example.dragonsushi.Objects;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
 
     int idUsuario;
     int fkPessoa;

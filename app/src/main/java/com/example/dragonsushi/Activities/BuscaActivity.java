@@ -29,7 +29,7 @@ public class BuscaActivity extends AppCompatActivity {
     ImageButton btnSearch;
     EditText edtxtSearch;
     String PARAMETER = "nomeProd";
-    String url = "https://longsagecard29.conveyor.cloud/api/ProdutoApi/ConsultarCardapio";
+    String url = "https://lastshinyapple50.conveyor.cloud/api/ProdutoApi/ConsultarCardapio";
     private List<Product> productList = new ArrayList<Product>();
     ListView listViewProduct;
     @Override

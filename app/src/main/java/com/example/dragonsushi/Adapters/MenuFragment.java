@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.dragonsushi.Activities.BuscaActivity;
 import com.example.dragonsushi.Activities.HomeActivity;
+import com.example.dragonsushi.Activities.PerfilActivity;
 import com.example.dragonsushi.R;
 
 public class MenuFragment extends Fragment {
@@ -48,7 +49,7 @@ public class MenuFragment extends Fragment {
             startActivity(intent);
         });
         btnPerson.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), HomeActivity.class);
+            Intent intent = new Intent(getContext(), PerfilActivity.class);
             startActivity(intent);
         });
 

@@ -36,7 +36,7 @@ public class CadastroActivity extends AppCompatActivity {
     EditText edtxtNome, edtxtTelefone, edtxtCpf, edtxtEmail, edtxtSenha, edtxtConfSenha;
     Button btnCadastrar;
     String nome, telefone, cpf, email, senha, confirmar;
-    String url = "https://lostashpen80.conveyor.cloud/api/UsuarioApi/";
+    String url = "https://lastshinyapple50.conveyor.cloud/api/UsuarioApi/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

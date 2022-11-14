@@ -2,7 +2,6 @@ package com.example.dragonsushi.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,20 +10,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.volley.Response;
 import com.bumptech.glide.Glide;
-import com.example.dragonsushi.Activities.CategoriaActivity;
 import com.example.dragonsushi.Activities.DetalhesActivity;
-import com.example.dragonsushi.Activities.ProductActivity;
 import com.example.dragonsushi.Objects.Product;
 import com.example.dragonsushi.R;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.io.Serializable;
 
 public class ListViewAdapter extends BaseAdapter {
     private final int layout;
