@@ -1,8 +1,7 @@
 package com.example.dragonsushi.Activities;
 
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
-import retrofit2.Call;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
@@ -19,32 +18,18 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.dragonsushi.Objects.Client;
 import com.example.dragonsushi.Objects.Person;
 import com.example.dragonsushi.Objects.User;
 import com.example.dragonsushi.R;
-import com.example.dragonsushi.Service.UserClient;
 import com.android.volley.Response;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
-
-import retrofit.RetrofitError;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
 
 public class CadastroActivity extends AppCompatActivity {
 
@@ -77,79 +62,20 @@ public class CadastroActivity extends AppCompatActivity {
 
             Person person = new Person(nome, telefone, cpf);
             User user = new User(email, senha);
-            Client client = new Client(user, person);
 
             validarCampos();
-            postDataUser(person, user);
 
-            /*if(Objects.equals(senha, confirmar))
-                postDataUser(client);
-            else
-                Toast.makeText(CadastroActivity.this, "As senhas não correspondem.", Toast.LENGTH_SHORT).show();*/
+            if(Objects.equals(senha, confirmar)){
+                postDataUser(person, user);
+                Intent intent = new Intent(this, LoginActivity.class);
+                Toast.makeText(this, "Cadastro efetuado", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
+            else {
+                Toast.makeText(CadastroActivity.this, "As senhas não correspondem.", Toast.LENGTH_SHORT).show();
+            }
         });
     }
-
-    /*private void postDataUser(Client client){
-        try {
-            Retrofit.Builder builder = new Retrofit.Builder().baseUrl(url).addConverterFactory(GsonConverterFactory.create());
-
-            Retrofit retrofit = builder.build();
-            UserClient userClient = retrofit.create(UserClient.class);
-            Call<Client> call = userClient.createAccount(client);
-
-            call.enqueue(new Callback<Client>() {
-                @Override
-                public void onResponse(Call<Client> call, Response<Client> response) {
-                    Toast.makeText(CadastroActivity.this, "certo", Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onFailure(Call<Client> call, Throwable t) {
-                    Toast.makeText(CadastroActivity.this, "errado", Toast.LENGTH_SHORT).show();
-                }
-            });
-        } catch (Exception e){
-            Toast.makeText(CadastroActivity.this, "errado2", Toast.LENGTH_SHORT).show();
-        }
-    }*/
-
-    /*private void postDataUser(Client client) {
-        RequestQueue queue = Volley.newRequestQueue(CadastroActivity.this);
-
-        StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(CadastroActivity.this, "Fail to get response = " + error, Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-
-                taskService.createTask(client, new Callback<Client>(){});
-
-
-                Map<String, String> params = new HashMap<String, String>();
-
-                params.put("nomePessoa", name);
-                params.put("telefone", phone);
-                params.put("cpf", id);
-                params.put("login", e_mail);
-                params.put("senha", password);
-
-                return params;
-            }
-        };
-        queue.add(request);
-    }*/
 
     public void postDataUser(Person person, User user){
         try {
