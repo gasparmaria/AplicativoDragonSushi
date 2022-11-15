@@ -1,6 +1,8 @@
 package com.example.dragonsushi.Objects;
 
-public class Estado {
+import java.io.Serializable;
+
+public class Estado implements Serializable {
     String uf;
 
     public Estado(String uf) {

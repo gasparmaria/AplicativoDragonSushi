@@ -16,7 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.dragonsushi.Adapters.ListViewAdapter;
+import com.example.dragonsushi.Adapters.ProdutoListView;
 import com.example.dragonsushi.Adapters.MenuFragment;
 import com.example.dragonsushi.Objects.Product;
 import com.example.dragonsushi.R;
@@ -96,7 +96,7 @@ public class CategoriaActivity extends AppCompatActivity {
 
                                 productList.add(product1);
                             }
-                            ListViewAdapter adapter = new ListViewAdapter(getApplicationContext(),R.layout.listview_produto, productList);
+                            ProdutoListView adapter = new ProdutoListView(getApplicationContext(),R.layout.listview_produto, productList);
                             listViewProduct = findViewById(R.id.listviewCategoria);
                             listViewProduct.setAdapter(adapter);
                         } catch (JSONException exception) {

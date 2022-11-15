@@ -8,7 +8,6 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.Address;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
@@ -35,13 +34,13 @@ import com.example.dragonsushi.Objects.Cidade;
 import com.example.dragonsushi.Objects.Endereco;
 import com.example.dragonsushi.Objects.Estado;
 import com.example.dragonsushi.Objects.Logradouro;
-import com.example.dragonsushi.Objects.Person;
-import com.example.dragonsushi.Objects.User;
 import com.example.dragonsushi.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -50,10 +49,11 @@ import java.util.Locale;
 public class AddressActivity extends AppCompatActivity {
     ImageButton imgLocation;
     TextView txtLocation;
-    EditText edtxtLogradouro, edtxtCep, edtxtNumero, edtxtBairro, edtxtComplemento, edtxtCidade, edtxtUf;
-    String logradouro, cep, numero, bairro, complemento, cidade, uf;
+    EditText edtxtLogradouro, edtxtNumero, edtxtBairro, edtxtComplemento, edtxtCidade, edtxtUf;
+    String logradouro, numero, bairro, complemento, cidade, uf;
     Button btnSalvar;
-    String URL = "https://longgreycar52.conveyor.cloud/api/EnderecoApi/";
+    String URL = "https://lostgreyapple33.conveyor.cloud/api/EnderecoApi/";
+    private FusedLocationProviderClient fusedLocationProviderClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +64,6 @@ public class AddressActivity extends AppCompatActivity {
         imgLocation = findViewById(R.id.imgLocation);
         txtLocation = findViewById(R.id.txtLocation);
         edtxtLogradouro = findViewById(R.id.edtxtLogradouro);
-        edtxtCep = findViewById(R.id.edtxtCep);
         edtxtNumero = findViewById(R.id.edtxtNumero);
         edtxtBairro = findViewById(R.id.edtxtBairro);
         edtxtComplemento = findViewById(R.id.edtxtComplemento);
@@ -79,29 +78,49 @@ public class AddressActivity extends AppCompatActivity {
             getPermission();
         });
 
-        btnSalvar.setOnClickListener(v -> {
-            logradouro = String.valueOf(edtxtLogradouro.getText());
-            cep = String.valueOf(edtxtCep.getText());
-            numero = String.valueOf(edtxtNumero.getText());
-            bairro = String.valueOf(edtxtBairro.getText());
-            complemento = String.valueOf(edtxtComplemento.getText());
-            cidade = String.valueOf(edtxtCidade.getText());
-            uf = String.valueOf(edtxtUf.getText());
+        Intent intent = getIntent();
+        if(intent.hasExtra("Endereco")){
+            Endereco oEndereco = (Endereco) intent.getSerializableExtra("Endereco");
 
-            Logradouro cLogradouro = new Logradouro(logradouro);
-            Bairro cBairro = new Bairro(bairro);
-            Cidade cCidade = new Cidade(cidade);
-            Estado cEstado = new Estado(uf);
-            Endereco cEndereco = new Endereco(cLogradouro, cBairro, cCidade, cEstado, numero, complemento);
+            Logradouro oLogradouro = oEndereco.getLogradouro();
+            Bairro oBairro = oEndereco.getBairro();
+            Cidade oCidade = oEndereco.getCidade();
+            Estado oEstado = oEndereco.getEstado();
 
-            validarCampos();
-            postDataAddress(cLogradouro, cBairro, cCidade, cEstado);
+            edtxtLogradouro.setText(oLogradouro.getLogradouro());
+            edtxtNumero.setText(oEndereco.getNumero());
+            edtxtBairro.setText(oBairro.getBairro());
+            edtxtComplemento.setText(oEndereco.getComplemento());
+            edtxtCidade.setText(oCidade.getCidade());
+            edtxtUf.setText(oEstado.getUf());
+        } else {
+            btnSalvar.setOnClickListener(v -> {
+                logradouro = String.valueOf(edtxtLogradouro.getText());
+                numero = String.valueOf(edtxtNumero.getText());
+                bairro = String.valueOf(edtxtBairro.getText());
+                complemento = String.valueOf(edtxtComplemento.getText());
+                cidade = String.valueOf(edtxtCidade.getText());
+                uf = String.valueOf(edtxtUf.getText());
 
-            Intent intent = new Intent(this, CarrinhoActivity.class);
-            intent.putExtra("Endereco", cEndereco);
-            Toast.makeText(this, "Endereço salvo", Toast.LENGTH_SHORT).show();
-            startActivity(intent);
-        });
+                try {
+                    Logradouro cLogradouro = new Logradouro(logradouro);
+                    Bairro cBairro = new Bairro(bairro);
+                    Cidade cCidade = new Cidade(cidade);
+                    Estado cEstado = new Estado(uf);
+                    Endereco cEndereco = new Endereco(cLogradouro, cBairro, cCidade, cEstado, numero, complemento);
+
+                    validarCampos();
+                    postDataAddress(cLogradouro, cBairro, cCidade, cEstado);
+
+                    Intent intentAddress = new Intent(this, CarrinhoActivity.class);
+                    intentAddress.putExtra("Endereco", cEndereco);
+                    Toast.makeText(this, "Endereço salvo", Toast.LENGTH_SHORT).show();
+                    startActivity(intentAddress);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        }
     }
 
     public void postDataAddress(Logradouro logradouro, Bairro bairro, Cidade cidade, Estado estado){
@@ -186,21 +205,21 @@ public class AddressActivity extends AppCompatActivity {
     @SuppressLint("MissingPermission")
     private void getLocation() {
         fusedLocationProviderClient.getLastLocation().addOnCompleteListener(task -> {
-            //PEGAR A LOCALIZAÇÃO
             Location location = task.getResult();
+
             if (location != null) {
                 try {
                     Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+
                     List<Address> addressList = geocoder.getFromLocation(
                             location.getLatitude(), location.getLongitude(), 1
                     );
-                    //EXIBIR TEXTOS
-                    edtxtLogradouro.setText(Html.fromHtml(String.valueOf(addressList.get(0).getThoroughfare())));
-                    edtxtCep.setText((Html.fromHtml(String.valueOf(addressList.get(0).getPostalCode()))));
-                    edtxtNumero.setText(Html.fromHtml(String.valueOf(addressList.get(0).getFeatureName())));
-                    edtxtBairro.setText(Html.fromHtml(String.valueOf(addressList.get(0).getSubLocality())));
-                    edtxtCidade.setText(Html.fromHtml(String.valueOf(addressList.get(0).getSubAdminArea())));
-                    edtxtUf.setText(Html.fromHtml(String.valueOf(addressList.get(0).getAdminArea())));
+
+                    edtxtLogradouro.setText(String.valueOf(addressList.get(0).getThoroughfare()));
+                    edtxtNumero.setText(String.valueOf(addressList.get(0).getFeatureName()));
+                    edtxtBairro.setText(String.valueOf(addressList.get(0).getSubLocality()));
+                    edtxtCidade.setText(String.valueOf(addressList.get(0).getSubAdminArea()));
+                    edtxtUf.setText(String.valueOf(addressList.get(0).getAdminArea()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -215,9 +234,6 @@ public class AddressActivity extends AppCompatActivity {
         if (verificacao != campoNulo(logradouro)) {
             edtxtLogradouro.requestFocus();
             Toast.makeText(this, "Preencha o campo logradouro", Toast.LENGTH_SHORT).show();
-        } else if (verificacao != campoNulo(cep)) {
-            edtxtCep.requestFocus();
-            Toast.makeText(this, "Preencha o campo CEP", Toast.LENGTH_SHORT).show();
         } else if (verificacao != campoNulo(numero)) {
             edtxtNumero.requestFocus();
             Toast.makeText(this, "Preencha o campo número", Toast.LENGTH_SHORT).show();

@@ -1,6 +1,8 @@
 package com.example.dragonsushi.Objects;
 
-public class Cidade {
+import java.io.Serializable;
+
+public class Cidade implements Serializable {
     int id;
     String cidade;
 

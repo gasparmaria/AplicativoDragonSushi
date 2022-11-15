@@ -18,12 +18,12 @@ import com.example.dragonsushi.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListViewAdapter extends BaseAdapter {
+public class ProdutoListView extends BaseAdapter {
     private final int layout;
     private final Context context;
     List<Product> productList = new ArrayList<Product>();
 
-    public ListViewAdapter(Context context, int layout, List<Product> product1) {
+    public ProdutoListView(Context context, int layout, List<Product> product1) {
         this.context = context;
         this.layout = layout;
         this.productList = product1;

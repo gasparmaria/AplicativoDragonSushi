@@ -1,8 +1,9 @@
 package com.example.dragonsushi.Objects;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Delivery {
+public class Delivery implements Serializable {
 
     private int id, fkPessoa, fkEndereco, fkComanda, fkPagamento;
     private String data;

@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.dragonsushi.Adapters.MenuFragment;
 import com.example.dragonsushi.Objects.Endereco;
 import com.example.dragonsushi.Objects.FormaPagamento;
+import com.example.dragonsushi.Objects.Logradouro;
 import com.example.dragonsushi.R;
 
 public class CarrinhoActivity extends AppCompatActivity {
@@ -45,7 +46,13 @@ public class CarrinhoActivity extends AppCompatActivity {
 
         if(intent.hasExtra("Endereco")){
             Endereco address = (Endereco) intent.getSerializableExtra("Endereco");
-            txtEntrega.setText(address.getRua());
+            Logradouro logradouro = address.getLogradouro();
+            txtEntrega.setText(logradouro.getLogradouro());
+            txtEntrega.setOnClickListener(v ->{
+                Intent intentAddress = new Intent(getApplicationContext(), AddressActivity.class);
+                intentAddress.putExtra("Endereco", address);
+                startActivity(intentAddress);
+            });
         } else{
             txtEntrega.setOnClickListener(v ->{
                 Intent intentAddress = new Intent(getApplicationContext(), AddressActivity.class);
@@ -56,6 +63,10 @@ public class CarrinhoActivity extends AppCompatActivity {
         if(intent.hasExtra("Pagamento")){
             FormaPagamento formaPagamento = (FormaPagamento) intent.getSerializableExtra("Pagamento");
             txtFormaPagto.setText(formaPagamento.getFormaPag());
+            txtFormaPagto.setOnClickListener(v ->{
+                Intent intentPagto = new Intent(getApplicationContext(), PagtoActivity.class);
+                startActivity(intentPagto);
+            });
         } else{
             txtFormaPagto.setOnClickListener(v ->{
                 Intent intentPagto = new Intent(getApplicationContext(), PagtoActivity.class);

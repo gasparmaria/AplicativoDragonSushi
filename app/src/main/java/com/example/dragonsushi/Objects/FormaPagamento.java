@@ -1,6 +1,8 @@
 package com.example.dragonsushi.Objects;
 
-public class FormaPagamento {
+import java.io.Serializable;
+
+public class FormaPagamento implements Serializable {
 
     private int id;
     private String formaPag;
@@ -9,6 +11,10 @@ public class FormaPagamento {
 
     public FormaPagamento(int id, String formaPag){
         this.id = id;
+        this.formaPag = formaPag;
+    }
+
+    public FormaPagamento(String formaPag){
         this.formaPag = formaPag;
     }
 

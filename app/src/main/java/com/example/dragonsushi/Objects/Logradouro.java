@@ -1,6 +1,8 @@
 package com.example.dragonsushi.Objects;
 
-public class Logradouro {
+import java.io.Serializable;
+
+public class Logradouro implements Serializable {
     int id;
     String logradouro;
 
