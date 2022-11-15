@@ -5,11 +5,11 @@ import java.util.Date;
 public class Delivery {
 
     private int id, fkPessoa, fkEndereco, fkComanda, fkPagamento;
-    private Date data;
+    private String data;
 
     public Delivery(){}
 
-    public Delivery(int id, Date data, int fkPessoa, int fkEndereco, int fkComanda, int fkPagamento){
+    public Delivery(int id, String data, int fkPessoa, int fkEndereco, int fkComanda, int fkPagamento){
         this.id = id;
         this.data = data;
         this.fkPessoa = fkPessoa;
@@ -58,11 +58,11 @@ public class Delivery {
         this.fkPagamento = fkPagamento;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 }

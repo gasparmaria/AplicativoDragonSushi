@@ -37,6 +37,7 @@
         <activity android:name=".Activities.DetalhesActivity" />
         <activity android:name=".Activities.PerfilActivity" />
         <activity android:name=".Activities.EditActivity" />
+        <activity android:name=".Activities.HistoricoPedidoActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

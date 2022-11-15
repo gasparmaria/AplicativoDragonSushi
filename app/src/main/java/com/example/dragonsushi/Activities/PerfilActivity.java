@@ -28,6 +28,7 @@ import java.io.InputStreamReader;
 
 public class PerfilActivity extends AppCompatActivity {
     TextView txtNome, txtEmail;
+
     LinearLayout linearEdit, linearHistoric, linearLogout;
     private static final String FILE_NAME = "usuarioLogado.json";
 
@@ -60,7 +61,8 @@ public class PerfilActivity extends AppCompatActivity {
             startActivity(intent);
         });
         linearHistoric.setOnClickListener(v -> {
-
+            Intent intent = new Intent(this, HistoricoPedidoActivity.class);
+            startActivity(intent);
         });
         linearLogout.setOnClickListener(v -> {
             Intent intent = new Intent(this, LoginActivity.class);
