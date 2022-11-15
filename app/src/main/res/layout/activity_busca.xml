@@ -30,14 +30,6 @@
             android:gravity="center_vertical"
             android:layout_marginTop="8dp">
 
-            <ImageButton
-                android:id="@+id/btnSearch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:layout_marginRight="90dp"
-                app:srcCompat="@drawable/ic_searchview"/>
-
             <EditText
                 android:id="@+id/edtxtSearch"
                 android:layout_width="280dp"
@@ -45,6 +37,13 @@
                 android:backgroundTint="@color/white"
                 android:paddingBottom="0dp"
                 android:textColor="@color/black" />
+
+            <ImageButton
+                android:id="@+id/btnSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                app:srcCompat="@drawable/ic_searchview"/>
 
         </LinearLayout>
 
