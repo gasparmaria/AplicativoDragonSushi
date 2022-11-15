@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView txtCadastro;
     String login, senha;
     String PARAMETER = "login";
-    String URL = "https://lostashpen80.conveyor.cloud/api/UsuarioApi/ConsultarUsuario";
+    String URL = "https://longgreycar52.conveyor.cloud/api/UsuarioApi/ConsultarUsuario";
     DataBase dataBase;
     SQLiteDatabase conection;
     private static final String FILE_NAME = "usuarioLogado.json";
@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                 ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
                 try{
                     NetworkInfo ni = cm.getActiveNetworkInfo();
-                    if(ni.isConnected()){
+                    if(ni != null){
                         getUserData();
                     }
                     else{

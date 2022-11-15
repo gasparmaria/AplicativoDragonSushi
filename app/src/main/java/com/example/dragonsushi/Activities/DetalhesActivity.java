@@ -56,7 +56,7 @@ public class DetalhesActivity extends AppCompatActivity {
 
         txtName.setText(product.getNome());
         txtDescr.setText(product.getDescricao());
-        txtPrice.setText(new StringBuilder().append(getString(R.string.rs)).append(String.valueOf(product.getPreco())));
+        txtPrice.setText(String.format("R$%.2f", product.getPreco()));
         Glide.with(this).load(product.getImagem()).into(imgProduct);
 
         price = product.getPreco();
@@ -70,9 +70,6 @@ public class DetalhesActivity extends AppCompatActivity {
             counter--;
             price = updateCounter(price);
         });
-
-
-
     }
 
     private double updateCounter(double price){
