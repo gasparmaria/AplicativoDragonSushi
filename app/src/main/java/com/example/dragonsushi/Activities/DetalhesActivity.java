@@ -75,7 +75,6 @@ public class DetalhesActivity extends AppCompatActivity {
             if (counter < 1) {
                 btnLess.setEnabled(false);
             }
-
         });
     }
 

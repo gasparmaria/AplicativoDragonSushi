@@ -18,8 +18,9 @@ public class DataBase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE tbPerson(" +
-                "id INT NOT NULL," +
+        db.execSQL("CREATE TABLE tbClient(" +
+                "idUser INT NOT NULL," +
+                "idPerson INT NOT NULL," +
                 "name TEXT NOT NULL," +
                 "email TEXT NOT NULL," +
                 "password TEXT NOT NULL)");
@@ -27,7 +28,7 @@ public class DataBase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS tbPerson");
+        db.execSQL("DROP TABLE IF EXISTS tbClient");
 
         onCreate(db);
     }

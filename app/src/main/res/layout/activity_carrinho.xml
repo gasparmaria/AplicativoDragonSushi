@@ -43,8 +43,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                android:text="@string/limpar"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:text="@string/limpar" />
         </RelativeLayout>
 
         <ScrollView
@@ -53,9 +53,17 @@
             android:maxHeight="400dp">
 
             <ListView
+                android:id="@+id/listviewCarrinho"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </ScrollView>
+
+        <TextView
+            android:id="@+id/txtAddProduto"
+            style="@style/textviewred"
+            android:layout_width="wrap_content"
+            android:text="@string/adicionar_mais_itens"
+            android:layout_marginTop="5dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -156,13 +164,12 @@
             android:layout_marginTop="40dp"/>
     </LinearLayout>
 
-    <include
+    <FrameLayout
         android:id="@+id/bottom_menu"
         layout="@layout/bottom_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintStart_toStartOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

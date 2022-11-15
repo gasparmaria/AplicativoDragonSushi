@@ -66,4 +66,6 @@
     <string name="rs">R$</string>
     <string name="subtotal_">\"Subtotal: \"</string>
     <string name="sair">Sair</string>
+    <string name="adicionar_mais_itens">Adicionar mais itens</string>
+    <string name="logradouro">Logradouro</string>
 </resources>

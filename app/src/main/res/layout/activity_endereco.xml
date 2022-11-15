@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             
-            <ImageView
+            <ImageButton
                 android:id="@+id/imgLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,9 +42,9 @@
         </LinearLayout>
         
         <EditText
-            android:id="@+id/edtextLogradouro"
+            android:id="@+id/edtxtLogradouro"
             style="@style/editTextGray"
-            android:hint="Logradouro"/>
+            android:hint="@string/logradouro"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,12 +52,12 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/edtextCep"
+                android:id="@+id/edtxtCep"
                 style="@style/editTextGray1"
                 android:hint="@string/cep"/>
 
             <EditText
-                android:id="@+id/edtextNumero"
+                android:id="@+id/edtxtNumero"
                 style="@style/editTextGray2"
                 android:hint="@string/numero"/>
         </LinearLayout>
@@ -68,12 +68,12 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/edtextBairro"
+                android:id="@+id/edtxtBairro"
                 style="@style/editTextGray1"
                 android:hint="@string/bairro"/>
 
             <EditText
-                android:id="@+id/edtextComplemento"
+                android:id="@+id/edtxtComplemento"
                 style="@style/editTextGray2"
                 android:hint="@string/complemento"/>
         </LinearLayout>
@@ -84,12 +84,12 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/edtextCidade"
+                android:id="@+id/edtxtCidade"
                 style="@style/editTextGray1"
                 android:hint="@string/cidade"/>
 
             <EditText
-                android:id="@+id/edtextUf"
+                android:id="@+id/edtxtUf"
                 style="@style/editTextGray2"
                 android:hint="@string/uf"/>
         </LinearLayout>

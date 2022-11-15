@@ -6,6 +6,8 @@ public class Client implements Serializable {
     User user;
     Person person;
 
+    public Client(){}
+
     public Client(User user, Person person){
         this.user = user;
         this.person = person;

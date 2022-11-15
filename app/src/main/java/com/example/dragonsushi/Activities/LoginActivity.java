@@ -25,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.dragonsushi.DAO.UserDAO;
 import com.example.dragonsushi.DataBase;
 import com.example.dragonsushi.Objects.Client;
 import com.example.dragonsushi.Objects.Person;
@@ -149,10 +150,20 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     // VERIFICAR LOGIN PELO BANCO
-    public Boolean verificarLogin(String email, String senha){
-        Cursor cursor = conection.rawQuery("SELECT * FROM tbPerson WHERE email = ? AND password = ?", new String[] {email, senha});
+    public void verificarLogin(String email, String senha){
+        try {
+            UserDAO userDAO = new UserDAO(getApplicationContext());
+            Client client = userDAO.selectClient(email, senha);
 
-        return cursor.getCount() > 0;
+            Gson gson = new Gson();
+            String json = gson.toJson(client);
+            gravarDados(json);
+
+            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+            startActivity(intent);
+        } catch (Exception e){
+            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     // INSERIR USUÁRIO NO BANCO
@@ -161,12 +172,13 @@ public class LoginActivity extends AppCompatActivity {
         conection = dataBase.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put("id", user.getIdUsuario());
+        values.put("idUser", user.getIdUsuario());
+        values.put("idPerson", person.getId());
         values.put("name", person.getNome());
         values.put("email", user.getLogin());
         values.put("password", user.getSenha());
 
-        return conection.insert("tbPerson", null, values);
+        return conection.insert("tbClient", null, values);
     }
 
     // ARMAZENAR DADOS NO ARQUIVO JASON
