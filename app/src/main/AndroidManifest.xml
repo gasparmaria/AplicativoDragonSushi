@@ -36,6 +36,7 @@
         <activity android:name=".Activities.BuscaActivity" />
         <activity android:name=".Activities.DetalhesActivity" />
         <activity android:name=".Activities.PerfilActivity" />
+        <activity android:name=".Activities.EditActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

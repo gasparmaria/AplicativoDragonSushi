@@ -65,4 +65,5 @@
     <string name="combos">Combos</string>
     <string name="rs">R$</string>
     <string name="subtotal_">\"Subtotal: \"</string>
+    <string name="sair">Sair</string>
 </resources>

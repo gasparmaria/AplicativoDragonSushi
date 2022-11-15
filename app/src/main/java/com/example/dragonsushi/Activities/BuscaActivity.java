@@ -7,6 +7,8 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -15,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dragonsushi.Adapters.ListViewAdapter;
+import com.example.dragonsushi.Adapters.MenuFragment;
 import com.example.dragonsushi.Objects.Product;
 import com.example.dragonsushi.R;
 
@@ -29,14 +32,16 @@ public class BuscaActivity extends AppCompatActivity {
     ImageButton btnSearch;
     EditText edtxtSearch;
     String PARAMETER = "nomeProd";
-    String url = "https://lastshinyapple50.conveyor.cloud/api/ProdutoApi/ConsultarCardapio";
+    String URL = "https://lastshinyapple50.conveyor.cloud/api/ProdutoApi/ConsultarCardapio";
     private List<Product> productList = new ArrayList<Product>();
     ListView listViewProduct;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_busca);
+        displayFragment();
 
         btnSearch = findViewById(R.id.btnSearch);
         edtxtSearch = findViewById(R.id.edtxtSearch);
@@ -49,10 +54,11 @@ public class BuscaActivity extends AppCompatActivity {
 
         });
     }
+
     private void getProd(){
 
         productList.clear();
-        Uri builtUri = Uri.parse(url).buildUpon().appendQueryParameter(PARAMETER, edtxtSearch.getText().toString()).build();
+        Uri builtUri = Uri.parse(URL).buildUpon().appendQueryParameter(PARAMETER, edtxtSearch.getText().toString()).build();
         String builtUrl = builtUri.toString();
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, builtUrl,
@@ -90,5 +96,14 @@ public class BuscaActivity extends AppCompatActivity {
             }
         });
         queue.add(jsonArrayRequest);
+    }
+
+    // MENU FRAGMENT
+    public void displayFragment() {
+        MenuFragment menuFragment = MenuFragment.newInstance();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.add(R.id.bottom_menu,menuFragment).addToBackStack(null).commit();
     }
 }

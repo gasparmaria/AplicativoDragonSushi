@@ -1,6 +1,8 @@
 package com.example.dragonsushi.Objects;
 
-public class Client {
+import java.io.Serializable;
+
+public class Client implements Serializable {
     User user;
     Person person;
 
@@ -8,4 +10,21 @@ public class Client {
         this.user = user;
         this.person = person;
     }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }

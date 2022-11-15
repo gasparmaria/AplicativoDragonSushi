@@ -70,16 +70,12 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    // MENU FRAGMENT
     public void displayFragment() {
-        // Instancia o fragmento
         MenuFragment menuFragment = MenuFragment.newInstance();
-        // Obtem o gerenciado do fragmento e inicia a transação
         FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager
-                .beginTransaction();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        // Adiciona o fragmento.
-        fragmentTransaction.add(R.id.bottom_menu,
-                menuFragment).addToBackStack(null).commit();
+        fragmentTransaction.add(R.id.bottom_menu,menuFragment).addToBackStack(null).commit();
     }
 }

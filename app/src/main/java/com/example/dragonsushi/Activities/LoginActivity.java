@@ -45,13 +45,12 @@ import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String TAG = "LoginActivity";
     EditText edtxtLogin, edtxtSenha;
     Button btnLogin;
     TextView txtCadastro;
     String login, senha;
     String PARAMETER = "login";
-    String url = "https://lostashpen80.conveyor.cloud/api/UsuarioApi/ConsultarUsuario";
+    String URL = "https://lostashpen80.conveyor.cloud/api/UsuarioApi/ConsultarUsuario";
     DataBase dataBase;
     SQLiteDatabase conection;
     private static final String FILE_NAME = "usuarioLogado.json";
@@ -100,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
     private void getUserData() {
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        Uri builtUri = Uri.parse(url).buildUpon().appendQueryParameter(PARAMETER, edtxtLogin.getText().toString()).build();
+        Uri builtUri = Uri.parse(URL).buildUpon().appendQueryParameter(PARAMETER, edtxtLogin.getText().toString()).build();
         String builtUrl = builtUri.toString();
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, builtUrl,

@@ -7,6 +7,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -14,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dragonsushi.Adapters.ListViewAdapter;
+import com.example.dragonsushi.Adapters.MenuFragment;
 import com.example.dragonsushi.Objects.Product;
 import com.example.dragonsushi.R;
 import org.json.JSONArray;
@@ -29,7 +33,7 @@ public class CategoriaActivity extends AppCompatActivity {
     TextView categoria;
     ImageView imgProduto;
     String PARAMETER = "fkCategoria";
-    String url = "https://lastshinyapple50.conveyor.cloud/api/ProdutoApi/ConsultarCategoria";
+    String URL = "https://lastshinyapple50.conveyor.cloud/api/ProdutoApi/ConsultarCategoria";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,7 @@ public class CategoriaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_categoria);
         imgProduto = findViewById(R.id.imgProduto);
         categoria = findViewById(R.id.txtCategoria);
+        displayFragment();
 
         getCategoria();
     }
@@ -67,7 +72,7 @@ public class CategoriaActivity extends AppCompatActivity {
                 break;
         }
 
-        Uri builtUri = Uri.parse(url).buildUpon().appendQueryParameter(PARAMETER, category).build();
+        Uri builtUri = Uri.parse(URL).buildUpon().appendQueryParameter(PARAMETER, category).build();
         String builtUrl = builtUri.toString();
 
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -105,5 +110,14 @@ public class CategoriaActivity extends AppCompatActivity {
             }
         });
         queue.add(jsonArrayRequest);
+    }
+
+    // MENU FRAGMENT
+    public void displayFragment() {
+        MenuFragment menuFragment = MenuFragment.newInstance();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.add(R.id.bottom_menu,menuFragment).addToBackStack(null).commit();
     }
 }

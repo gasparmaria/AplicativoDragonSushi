@@ -10,20 +10,24 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.dragonsushi.Adapters.MenuFragment;
+import com.example.dragonsushi.Objects.Client;
 import com.example.dragonsushi.Objects.Person;
 import com.example.dragonsushi.Objects.User;
 import com.example.dragonsushi.R;
-import com.android.volley.Response;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,60 +35,68 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.Objects;
 
-public class CadastroActivity extends AppCompatActivity {
-
-    EditText edtxtNome, edtxtTelefone, edtxtCpf, edtxtEmail, edtxtSenha, edtxtConfSenha;
-    Button btnCadastrar;
-    String nome, telefone, cpf, email, senha, confirmar;
+public class EditActivity extends AppCompatActivity {
+    EditText edtxtNome, edtxtTelefone, edtxtEmail, edtxtSenha, edtxtConfSenha;
+    Button btnSalvar;
+    String nome, telefone, email, senha, confirmar;
     String URL = "https://lastshinyapple50.conveyor.cloud/api/UsuarioApi/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        setContentView(R.layout.activity_cadastro);
+        setContentView(R.layout.activity_editar);
+        displayFragment();
 
         edtxtNome = findViewById(R.id.edtxtNome);
         edtxtTelefone = findViewById(R.id.edtxtTelefone);
-        edtxtCpf = findViewById(R.id.edtxtCpf);
         edtxtEmail = findViewById(R.id.edtxtEmail);
         edtxtSenha = findViewById(R.id.edtxtSenha);
         edtxtConfSenha = findViewById(R.id.edtxtConfSenha);
-        btnCadastrar = findViewById(R.id.btnCadastrar);
+        btnSalvar = findViewById(R.id.btnSalvar);
 
-        btnCadastrar.setOnClickListener(v -> {
-            nome = String.valueOf(edtxtNome.getText());
-            telefone = String.valueOf(edtxtTelefone.getText());
-            cpf = String.valueOf(edtxtCpf.getText());
-            email = String.valueOf(edtxtEmail.getText());
-            senha = String.valueOf(edtxtSenha.getText());
-            confirmar = String.valueOf(edtxtConfSenha.getText());
+        Intent intent = getIntent();
+        intent.hasExtra("Cliente");
 
-            Person person = new Person(nome, telefone, cpf);
-            User user = new User(email, senha);
+        Client client = (Client) intent.getSerializableExtra("Cliente");
+        Person person = client.getPerson();
+        User user = client.getUser();
+
+        edtxtNome.setText(person.getNome());
+        edtxtTelefone.setText(person.getTelefone());
+        edtxtEmail.setText(user.getLogin());
+
+        btnSalvar.setOnClickListener(v -> {
+            nome = edtxtNome.getText().toString();
+            telefone = edtxtTelefone.getText().toString();
+            email = edtxtEmail.getText().toString();
+            senha = edtxtSenha.getText().toString();
+            confirmar = edtxtConfSenha.getText().toString();
+
+            Person person1 = new Person(nome, telefone);
+            User user1 = new User(email, senha);
 
             validarCampos();
 
             if(Objects.equals(senha, confirmar)){
-                postDataUser(person, user);
-                Intent intent = new Intent(this, LoginActivity.class);
-                Toast.makeText(this, "Cadastro efetuado", Toast.LENGTH_SHORT).show();
-                startActivity(intent);
+                putDataUser(person1, user1);
+                Intent intent1 = new Intent(this, PerfilActivity.class);
+                Toast.makeText(this, "Alterações efetuadas", Toast.LENGTH_SHORT).show();
+                startActivity(intent1);
             }
             else {
-                Toast.makeText(CadastroActivity.this, "As senhas não correspondem.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditActivity.this, "As senhas não correspondem.", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    public void postDataUser(Person person, User user){
+    public void putDataUser(Person person, User user){
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
 
             JSONObject pessoa = new JSONObject();
             pessoa.put("nomePessoa", person.getNome());
             pessoa.put("telefone", person.getTelefone());
-            pessoa.put("cpf", person.getCpf());
 
             JSONObject usuario = new JSONObject();
             usuario.put("login", user.getLogin());
@@ -147,9 +159,6 @@ public class CadastroActivity extends AppCompatActivity {
         } else if (verificacao != campoNulo(telefone)) {
             edtxtTelefone.requestFocus();
             Toast.makeText(this, "Preencha o campo telefone.", Toast.LENGTH_SHORT).show();
-        } else if (verificacao != campoNulo(cpf)) {
-            edtxtCpf.requestFocus();
-            Toast.makeText(this, "Preencha o campo CPF.", Toast.LENGTH_SHORT).show();
         } else if (verificacao != campoNulo(email)) {
             edtxtEmail.requestFocus();
             Toast.makeText(this, "Preencha o campo e-mail.", Toast.LENGTH_SHORT).show();
@@ -173,17 +182,23 @@ public class CadastroActivity extends AppCompatActivity {
 
         nome = String.valueOf(edtxtNome.getText());
         telefone = String.valueOf(edtxtTelefone.getText());
-        cpf = String.valueOf(edtxtCpf.getText());
         email = String.valueOf(edtxtEmail.getText());
         senha = String.valueOf(edtxtSenha.getText());
         confirmar = String.valueOf(edtxtConfSenha.getText());
 
         outState.putString("nome", nome);
         outState.putString("telefone", telefone);
-        outState.putString("cpf", cpf);
         outState.putString("email", email);
         outState.putString("senha", senha);
         outState.putString("confirmar", confirmar);
     }
-}
 
+    // MENU FRAGMENT
+    public void displayFragment() {
+        MenuFragment menuFragment = MenuFragment.newInstance();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.add(R.id.bottom_menu,menuFragment).addToBackStack(null).commit();
+    }
+}
