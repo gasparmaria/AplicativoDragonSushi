@@ -64,11 +64,16 @@ public class DetalhesActivity extends AppCompatActivity {
         counter = 0;
         btnMore.setOnClickListener(v ->{
             counter++;
-            price = updateCounter(price);
+            subtotal = updateCounter(price);
         });
         btnLess.setOnClickListener(v ->{
-            counter--;
-            price = updateCounter(price);
+            if (counter < 1){
+                btnLess.setEnabled(false);
+            } else if(counter >= 1){
+                btnLess.setEnabled(true);
+                counter--;
+                subtotal = updateCounter(price);
+            }
         });
 
 

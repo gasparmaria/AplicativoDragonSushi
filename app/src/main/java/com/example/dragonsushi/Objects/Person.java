@@ -5,24 +5,24 @@ import java.io.Serializable;
 public class Person implements Serializable {
 
     private int id;
-    private String nome, telefone, cpf;
+    private String nomePessoa, telefone, cpf;
 
     public Person(){}
 
-    public Person(int id, String nome, String telefone, String cpf){
+    public Person(int id, String nomePessoa, String telefone, String cpf){
         this.id = id;
-        this.nome = nome;
+        this.nomePessoa = nomePessoa;
         this.telefone = telefone;
         this.cpf = cpf;
     }
 
-    public Person(String nome, String telefone){
-        this.nome = nome;
+    public Person(String nomePessoa, String telefone){
+        this.nomePessoa = nomePessoa;
         this.telefone = telefone;
     }
 
-    public Person(String nome, String telefone, String cpf){
-        this.nome = nome;
+    public Person(String nomePessoa, String telefone, String cpf){
+        this.nomePessoa = nomePessoa;
         this.telefone = telefone;
         this.cpf = cpf;
     }
@@ -36,11 +36,11 @@ public class Person implements Serializable {
     }
 
     public String getNome() {
-        return nome;
+        return nomePessoa;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nomePessoa = nome;
     }
 
     public String getTelefone() {
