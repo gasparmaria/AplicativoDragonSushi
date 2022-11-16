@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView txtCadastro;
     String login, senha;
     String PARAMETER = "login";
-    String URL = "https://lostgreyapple33.conveyor.cloud/api/UsuarioApi/ConsultarUsuario";
+    String URL = "https://tallpurpleboard19.conveyor.cloud/api/UsuarioApi/ConsultarUsuario";
     DataBase dataBase;
     SQLiteDatabase conection;
     private static final String FILE_NAME = "usuarioLogado.json";

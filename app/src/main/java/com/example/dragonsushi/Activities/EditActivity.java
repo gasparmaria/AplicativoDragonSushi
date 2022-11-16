@@ -46,7 +46,7 @@ public class EditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_editar);
-        displayFragment();
+        //displayFragment();
 
         edtxtNome = findViewById(R.id.edtxtNome);
         edtxtTelefone = findViewById(R.id.edtxtTelefone);
@@ -73,8 +73,8 @@ public class EditActivity extends AppCompatActivity {
             senha = edtxtSenha.getText().toString();
             confirmar = edtxtConfSenha.getText().toString();
 
-            Person person1 = new Person(nome, telefone);
-            User user1 = new User(email, senha);
+            Person person1 = new Person(person.getId(),nome, telefone);
+            User user1 = new User(user.getIdUsuario(),email, senha);
 
             validarCampos();
 
@@ -97,10 +97,12 @@ public class EditActivity extends AppCompatActivity {
             JSONObject pessoa = new JSONObject();
             pessoa.put("nomePessoa", person.getNome());
             pessoa.put("telefone", person.getTelefone());
+            pessoa.put("idPessoa", person.getId());
 
             JSONObject usuario = new JSONObject();
             usuario.put("login", user.getLogin());
             usuario.put("senha", user.getSenha());
+            usuario.put("idUsuario", user.getIdUsuario());
 
 
             JSONObject jsonBody = new JSONObject();
@@ -109,7 +111,7 @@ public class EditActivity extends AppCompatActivity {
 
             final String requestBody = jsonBody.toString();
 
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            StringRequest stringRequest = new StringRequest(Request.Method.PUT, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     Log.i("VOLLEY", response);
@@ -193,12 +195,4 @@ public class EditActivity extends AppCompatActivity {
         outState.putString("confirmar", confirmar);
     }
 
-    // MENU FRAGMENT
-    public void displayFragment() {
-        MenuFragment menuFragment = MenuFragment.newInstance();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        fragmentTransaction.add(R.id.bottom_menu,menuFragment).addToBackStack(null).commit();
-    }
 }

@@ -15,6 +15,11 @@ public class Person implements Serializable {
         this.telefone = telefone;
         this.cpf = cpf;
     }
+    public Person(int idPessoa, String nomePessoa, String telefone){
+        this.idPessoa = idPessoa;
+        this.nomePessoa = nomePessoa;
+        this.telefone = telefone;
+    }
 
     public Person(String nomePessoa, String telefone){
         this.nomePessoa = nomePessoa;
