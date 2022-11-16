@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.dragonsushi.Activities.DetalhesActivity;
+import com.example.dragonsushi.Objects.Historico;
 import com.example.dragonsushi.Objects.Product;
 import com.example.dragonsushi.R;
 

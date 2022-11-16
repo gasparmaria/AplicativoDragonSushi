@@ -115,6 +115,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             login = user.getString("login");
                             senha = user.getString("senha");
+                            int fkPessoa = person.getInt("idPessoa");
 
                             if ((edtxtLogin.getText().toString()).equals(login) && (edtxtSenha.getText().toString()).equals(senha)) {
                                 Gson gson = new Gson();
