@@ -61,6 +61,8 @@ public class AddressActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_endereco);
 
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
         imgLocation = findViewById(R.id.imgLocation);
         txtLocation = findViewById(R.id.txtLocation);
         edtxtLogradouro = findViewById(R.id.edtxtLogradouro);
@@ -102,27 +104,33 @@ public class AddressActivity extends AppCompatActivity {
                 cidade = String.valueOf(edtxtCidade.getText());
                 uf = String.valueOf(edtxtUf.getText());
 
-                try {
-                    Logradouro cLogradouro = new Logradouro(logradouro);
-                    Bairro cBairro = new Bairro(bairro);
-                    Cidade cCidade = new Cidade(cidade);
-                    Estado cEstado = new Estado(uf);
-                    Endereco cEndereco = new Endereco(cLogradouro, cBairro, cCidade, cEstado, numero, complemento);
+                if (!uf.equals("SP")){
+                    edtxtUf.requestFocus();
+                    Toast.makeText(this, "Entregamos apenas em São Paulo", Toast.LENGTH_SHORT).show();
+                } else {
+                    try {
+                        Logradouro cLogradouro = new Logradouro(logradouro);
+                        Bairro cBairro = new Bairro(bairro);
+                        Cidade cCidade = new Cidade(cidade);
+                        Estado cEstado = new Estado(uf);
+                        Endereco cEndereco = new Endereco(cLogradouro, cBairro, cCidade, cEstado, numero, complemento);
 
-                    validarCampos();
-                    postDataAddress(cLogradouro, cBairro, cCidade, cEstado);
+                        validarCampos();
+                        postDataAddress(cLogradouro, cBairro, cCidade, cEstado);
 
-                    Intent intentAddress = new Intent(this, CarrinhoActivity.class);
-                    intentAddress.putExtra("Endereco", cEndereco);
-                    Toast.makeText(this, "Endereço salvo", Toast.LENGTH_SHORT).show();
-                    startActivity(intentAddress);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                        Intent intentAddress = new Intent(this, CarrinhoActivity.class);
+                        intentAddress.putExtra("Endereco", cEndereco);
+                        Toast.makeText(this, "Endereço salvo", Toast.LENGTH_SHORT).show();
+                        startActivity(intentAddress);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             });
         }
     }
 
+    // CADASTRAR ENDEREÇO PELA API
     public void postDataAddress(Logradouro logradouro, Bairro bairro, Cidade cidade, Estado estado){
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -191,10 +199,8 @@ public class AddressActivity extends AppCompatActivity {
     private void getPermission(){
         if (ActivityCompat.checkSelfPermission(getApplicationContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            //PERMISSÃO CEDIDA
             getLocation();
         } else {
-            //PERMISSÃO NEGADA
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     44);
@@ -219,7 +225,11 @@ public class AddressActivity extends AppCompatActivity {
                     edtxtNumero.setText(String.valueOf(addressList.get(0).getFeatureName()));
                     edtxtBairro.setText(String.valueOf(addressList.get(0).getSubLocality()));
                     edtxtCidade.setText(String.valueOf(addressList.get(0).getSubAdminArea()));
-                    edtxtUf.setText(String.valueOf(addressList.get(0).getAdminArea()));
+
+                    String uf = String.valueOf(addressList.get(0).getAdminArea());
+                    if(uf.equals("São Paulo")){
+                        edtxtUf.setText("SP");
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -123,9 +123,21 @@
                 android:id="@+id/txtSubtotal"
                 style="@style/textviewgray3"
                 android:layout_width="wrap_content"
+                android:layout_above="@+id/btnAdicionar"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="0dp"
+                android:text="@string/subtotal_000" />
+
+            <Button
+                android:id="@+id/btnAdicionar"
+                style="@style/buttonAdicionar"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:text="@string/subtotal_000" />
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:text="@string/adicionar_ao_carrinho"
+                android:textAllCaps="false"/>
+
 
             <!--<Button
                 android:id="@+id/btnAdicionar"

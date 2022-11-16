@@ -45,7 +45,6 @@ public class ProdutoListView extends BaseAdapter {
     }
 
     private class ViewHolder {
-        View itemlist;
         TextView txtProductName, txtProductDescr, txtProductPrice;
         ImageView imgProduct;
         LinearLayout constrait;
@@ -83,7 +82,7 @@ public class ProdutoListView extends BaseAdapter {
 
         holder.txtProductName.setText(product1.getNome());
         holder.txtProductDescr.setText(product1.getDescricao());
-        holder.txtProductPrice.setText(new StringBuilder().append("R$").append(Double.toString(product1.getPreco())).toString());
+        holder.txtProductPrice.setText(String.format("R$%.2f", product1.getPreco()));
 
         return row;
     }

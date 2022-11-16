@@ -18,18 +18,21 @@
 
         <TextView
             android:id="@+id/txtData"
-            style="@style/textviewblackbold"
+            android:layout_width="wrap_content"
+            style="@style/textviewblack"
             android:text="@string/data" />
 
         <TextView
             android:id="@+id/txtItens"
             android:layout_width="wrap_content"
             style="@style/textviewblack"
+            android:textColor="@color/gray"
             android:text="@string/numero_de_itens"/>
 
         <TextView
             android:id="@+id/txtTotal"
-            style="@style/textviewblackbold"
+            android:layout_width="wrap_content"
+            style="@style/textviewblack"
             android:text="@string/preco"
             android:layout_marginVertical="8dp"/>
 

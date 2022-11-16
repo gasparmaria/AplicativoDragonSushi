@@ -43,7 +43,7 @@ public class HistoricoPedidoActivity extends AppCompatActivity {
     String PARAMETER = "fkPessoa";
     String URL = "https://lostgreyapple33.conveyor.cloud/api/DeliveryApi/HistoricoPedido";
     private static final String FILE_NAME = "usuarioLogado.json";
-    private List<DeliveryViewModel> productList = new ArrayList<DeliveryViewModel>();
+    private List<DeliveryViewModel> deliveryList = new ArrayList<DeliveryViewModel>();
     ListView listViewProduct;
 
     @Override
@@ -99,11 +99,11 @@ public class HistoricoPedidoActivity extends AppCompatActivity {
                                 vmDelivery.setFormaPagamento(fpagamento);
 
 
-                                productList.add(vmDelivery);
+                                deliveryList.add(vmDelivery);
                             }
-                            ProdutoListView adapter = new ProdutoListView(getApplicationContext(),R.layout.listview_produto, productList);
+                            //ProdutoListView adapter = new ProdutoListView(getApplicationContext(),R.layout.listview_carrinho, deliveryList);
                             listViewProduct = findViewById(R.id.listviewCategoria);
-                            listViewProduct.setAdapter(adapter);
+                            //listViewProduct.setAdapter(adapter);
                         } catch (JSONException exception) {
                             exception.printStackTrace();
                         }
