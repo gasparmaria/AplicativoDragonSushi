@@ -22,6 +22,10 @@
         <activity
             android:name=".Activities.LoginActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".Activities.HomeActivity"
             android:exported="true">
@@ -39,6 +43,7 @@
         <activity android:name=".Activities.PerfilActivity" />
         <activity android:name=".Activities.EditActivity" />
         <activity android:name=".Activities.AddressActivity" />
+        <activity android:name=".Activities.HistoricoPedidoActivity" />
         <activity android:name=".Activities.PagtoActivity" />
         <activity android:name=".Activities.CarrinhoActivity"
             android:exported="true">

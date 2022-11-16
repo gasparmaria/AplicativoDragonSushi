@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 public class Person implements Serializable {
 
-    private int id;
+    private int idPessoa;
     private String nomePessoa, telefone, cpf;
 
     public Person(){}
 
-    public Person(int id, String nomePessoa, String telefone, String cpf){
-        this.id = id;
+    public Person(int idPessoa, String nomePessoa, String telefone, String cpf){
+        this.idPessoa = idPessoa;
         this.nomePessoa = nomePessoa;
         this.telefone = telefone;
         this.cpf = cpf;
@@ -28,11 +28,11 @@ public class Person implements Serializable {
     }
 
     public int getId() {
-        return id;
+        return idPessoa;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int idPessoa) {
+        this.idPessoa = idPessoa;
     }
 
     public String getNome() {
