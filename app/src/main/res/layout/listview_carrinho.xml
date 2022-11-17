@@ -74,8 +74,8 @@
                 android:id="@+id/txtSubtotalProduto"
                 style="@style/textviewblack"
                 android:layout_width="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
                 android:text="@string/preco" />
         </RelativeLayout>
     </LinearLayout>

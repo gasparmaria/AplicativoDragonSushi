@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.dragonsushi.Objects.Carrinho;
 import com.example.dragonsushi.Objects.Carrinho;
 import com.example.dragonsushi.R;
@@ -63,6 +64,7 @@ public class CarrinhoListView extends BaseAdapter {
 
             holder.constrait = row.findViewById(R.id.linearCarrinho);
             holder.imgProduto = row.findViewById(R.id.imgProduto);
+            Glide.with(context).load(carrinhoList.get(position).getImgProd()).into(holder.imgProduto);
             holder.txtNomeProduto = row.findViewById(R.id.txtNomeProduto);
             holder.txtObsProduto = row.findViewById(R.id.txtObsProduto);
             holder.txtSubtotalProduto = row.findViewById(R.id.txtSubtotalProduto);
@@ -76,11 +78,8 @@ public class CarrinhoListView extends BaseAdapter {
 
         holder.txtNomeProduto.setText(Carrinho.getNomeProd());
         holder.txtObsProduto.setText(Carrinho.getObsPed());
-        //holder.imgProduto.setImage(Carrinho.getImgProd()));
         holder.txtNomeProduto.setText(Carrinho.getNomeProd());
         holder.txtSubtotalProduto.setText(Carrinho.getSubPed());
-        //holder.txtNomeProduto.setText(Carrinho.getNomeProd());
-        //holder.txtNomeProduto.setText(Carrinho.getNomeProd());
 
         return row;
     }

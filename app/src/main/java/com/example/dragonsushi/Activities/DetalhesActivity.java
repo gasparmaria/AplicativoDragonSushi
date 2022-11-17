@@ -44,9 +44,10 @@ public class DetalhesActivity extends AppCompatActivity {
     double price, subtotal;
     Integer counter;
     int idComanda;
-    String URL_GETCOMANDA = "https://otherashtower72.conveyor.cloud/api/ComandaApi/ComandaDelivery";
-    String URL_POSTCOMANDA = "https://otherashtower72.conveyor.cloud/api/ComandaApi/";
-    String URL_POSTPEDIDO = "https://otherashtower72.conveyor.cloud/api/PedidoApi/";
+    String URL_GETCOMANDA = "https://firstbluebook23.conveyor.cloud/api/ComandaApi/ComandaDelivery";
+    String URL_POSTCOMANDA = "https://firstbluebook23.conveyor.cloud/api/ComandaApi/";
+    String URL_POSTPEDIDO = "https://firstbluebook23.conveyor.cloud/api/PedidoApi/";
+    Intent intentComanda ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,37 +105,33 @@ public class DetalhesActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getComanda();
-                /*if(idComanda == 0){
-                    postComanda();
-                    getComanda();
-                    postPedido(counter, edtxtObs.getText().toString(), product.getId(), idComanda);
-                }else {
-                    postPedido(counter, edtxtObs.getText().toString(), product.getId(), idComanda);
-                }*/
+                getComanda(counter);
+                intentComanda = new Intent(getApplicationContext(), CarrinhoActivity.class);
+                intentComanda.putExtra("Subtotal", subtotal);
+                intentComanda.putExtra("Comanda", idComanda);
+                startActivity(intentComanda);
             }
         });
     }
 
-    private void getComanda(){
+    private void getComanda(int counte){
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_GETCOMANDA,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            String teste = response;
-                            if(teste != null) {
+                            JSONObject jsonObject = new JSONObject(response);
+                            int idComanda = jsonObject.getInt("idComanda");
+                            if(idComanda == 0) {
                                 postComanda();
-                            }else{
-                                JSONObject jsonObject = new JSONObject(response);
-                                int idComanda = jsonObject.getInt("idComanda");
-
+                            } else{
                                 Intent intent = getIntent();
                                 intent.hasExtra("Product");
                                 Product product = (Product) intent.getSerializableExtra("Product");
-                                postPedido(counter, edtxtObs.getText().toString(), product.getId(), jsonObject.getInt("idComanda"));
+                                postPedido(counte, edtxtObs.getText().toString(), product.getId(), jsonObject.getInt("idComanda"));
                             }
+
 
                             Log.e("url", "SucessMesage:");
                         } catch (JSONException jsonException) {
@@ -195,14 +192,14 @@ public class DetalhesActivity extends AppCompatActivity {
                 }
             };
             requestQueue.add(stringRequest);
-            getComanda();
+            getComanda(counter);
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
 
-        private double updateCounter(double price){
+    private double updateCounter(double price){
         txtQntd.setText(counter.toString());
         subtotal = price * counter;
         txtSubtotal.setText(String.format("Subtotal: R$%.2f", subtotal));
@@ -216,7 +213,6 @@ public class DetalhesActivity extends AppCompatActivity {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
 
             JSONObject produto = new JSONObject();
-            produto.put("qtdProd", counter);
             produto.put("idProd", id);
 
             JSONObject comanda = new JSONObject();
@@ -224,6 +220,7 @@ public class DetalhesActivity extends AppCompatActivity {
 
             JSONObject pedido = new JSONObject();
             pedido.put("descrPedido", descricao);
+            pedido.put("qtdProd", counter);
 
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("Produto",produto);
