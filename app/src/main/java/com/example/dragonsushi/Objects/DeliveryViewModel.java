@@ -5,6 +5,7 @@ public class DeliveryViewModel {
     Pagamento pagamento;
     FormaPagamento formaPagamento;
     Pedido pedido;
+    Comanda comanda;
 
     public Delivery getDelivery() {
         return delivery;
@@ -36,5 +37,13 @@ public class DeliveryViewModel {
 
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
+    }
+
+    public Comanda getComanda() {
+        return comanda;
+    }
+
+    public void setComanda(Comanda comanda) {
+        this.comanda = comanda;
     }
 }

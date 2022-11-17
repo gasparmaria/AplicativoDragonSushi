@@ -9,7 +9,7 @@
     android:padding="20dp">
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/linearCarrinho"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
