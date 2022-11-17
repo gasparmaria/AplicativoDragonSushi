@@ -33,7 +33,7 @@ public class CategoriaActivity extends AppCompatActivity {
     TextView categoria;
     ImageView imgProduto;
     String PARAMETER = "fkCategoria";
-    String URL = "https://tallpurpleboard19.conveyor.cloud/api/ProdutoApi/ConsultarCategoria";
+    String URL = "https://otherashtower72.conveyor.cloud/api/ProdutoApi/ConsultarCategoria";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
