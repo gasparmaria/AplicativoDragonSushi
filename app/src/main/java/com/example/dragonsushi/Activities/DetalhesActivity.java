@@ -1,5 +1,7 @@
 package com.example.dragonsushi.Activities;
 
+import static java.lang.Thread.sleep;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -112,6 +114,11 @@ public class DetalhesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getComanda(counter, subtotal);
+                try {
+                    sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 Intent intentComanda = new Intent(getApplicationContext(), CarrinhoActivity.class);
                 startActivity(intentComanda);
             }

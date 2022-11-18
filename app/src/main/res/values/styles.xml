@@ -495,15 +495,6 @@
     </style>
 
     <style name="buttonAdicionar">
-        <item name="android:layout_width">
-            190dp
-        </item>
-        <item name="android:layout_height">
-            35dp
-        </item>
-        <item name="backgroundTint">
-            @drawable/edittext_red
-        </item>
         <item name="android:background">
             @drawable/edittext_red
         </item>
@@ -515,9 +506,6 @@
         </item>
         <item name="android:textStyle">
             bold
-        </item>
-        <item name="textAllCaps">
-            false
         </item>
         <item name="android:textSize">
             14sp

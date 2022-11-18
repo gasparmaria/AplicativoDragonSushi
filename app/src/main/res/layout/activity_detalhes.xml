@@ -130,11 +130,13 @@
 
             <Button
                 android:id="@+id/btnAdd"
+                style="@style/buttonAdicionar"
+                android:layout_width="190dp"
+                android:layout_height="35dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
+                android:text="@string/adicionar_ao_carrinho"
+                android:textAllCaps="false" />
 
            <!-- <Button
                 android:id="@+id/btnAdicionar"
