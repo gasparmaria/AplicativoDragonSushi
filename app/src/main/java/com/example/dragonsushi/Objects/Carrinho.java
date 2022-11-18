@@ -3,11 +3,12 @@ package com.example.dragonsushi.Objects;
 import android.widget.ImageView;
 
 public class Carrinho {
-    String imgProd, nomeProd, obsPed, subPed;
+    String imgProd, nomeProd, obsPed;
+    double subPed;
 
     public Carrinho(){}
 
-    public Carrinho(String imgProd, String nomeProd, String obsPed, String subPed) {
+    public Carrinho(String imgProd, String nomeProd, String obsPed, double subPed) {
         this.imgProd = imgProd;
         this.nomeProd = nomeProd;
         this.obsPed = obsPed;
@@ -38,11 +39,11 @@ public class Carrinho {
         this.obsPed = obsPed;
     }
 
-    public String getSubPed() {
+    public double getSubPed() {
         return subPed;
     }
 
-    public void setSubPed(String subPed) {
+    public void setSubPed(double subPed) {
         this.subPed = subPed;
     }
 }

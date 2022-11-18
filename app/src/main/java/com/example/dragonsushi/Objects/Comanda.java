@@ -2,6 +2,17 @@ package com.example.dragonsushi.Objects;
 
 public class Comanda {
     int idComanda;
+    double subtotal;
+
+
+
+    public double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
+    }
 
     public  Comanda(){
 
@@ -15,7 +26,8 @@ public class Comanda {
         this.idComanda = idComanda;
     }
 
-    public Comanda(int idComanda) {
+    public Comanda(int idComanda, double subtotal) {
         this.idComanda = idComanda;
+        this.subtotal = subtotal;
     }
 }

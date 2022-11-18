@@ -19,30 +19,35 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dragonsushi.Adapters.CarrinhoListView;
 import com.example.dragonsushi.Adapters.MenuFragment;
-import com.example.dragonsushi.Adapters.ProdutoListView;
 import com.example.dragonsushi.Objects.Carrinho;
+import com.example.dragonsushi.Objects.Comanda;
 import com.example.dragonsushi.Objects.Endereco;
 import com.example.dragonsushi.Objects.FormaPagamento;
 import com.example.dragonsushi.Objects.Logradouro;
-import com.example.dragonsushi.Objects.Product;
 import com.example.dragonsushi.R;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CarrinhoActivity extends AppCompatActivity {
     TextView txtLimpar, txtAddItem, txtSubtotal, txtTaxa, txtTotal, txtFormaPagto, txtEntrega;
     Button btnPedido;
-    String URL_PEDIDO = "https://firstbluebook23.conveyor.cloud/api/PedidoApi/ConsultarPedidos";
+    String URL_PEDIDO = "https://tallpurplemouse41.conveyor.cloud/api/PedidoApi/ConsultarPedidos";
     String PARAMETER = "comanda";
     String comanda;
     List<Carrinho> carrinhoList = new ArrayList<Carrinho>();
     ListView listViewProduct;
-    String subtotal;
+    private static final String FILE_NAME = "comanda.json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,18 +103,20 @@ public class CarrinhoActivity extends AppCompatActivity {
                 startActivity(intentPagto);
             });
         }
-        if(intent.hasExtra("Comanda")){
-            comanda = intent.getStringExtra("Comanda");
-            subtotal = intent.getStringExtra("Subtotal");
-            getPedido(comanda, subtotal);
-        }
 
+
+        Gson gson = new Gson();
+        String comandaString = lerDados();
+        Comanda comanda = gson.fromJson(comandaString,Comanda.class);
+        int idComanda = comanda.getIdComanda();
+        getPedido(idComanda);
 
     }
 
-    public void getPedido(String comanda, String subtotal){
+    public void getPedido(int comanda){
 
-        Uri builtUri = Uri.parse(URL_PEDIDO).buildUpon().appendQueryParameter(PARAMETER, comanda).build();
+
+        Uri builtUri = Uri.parse(URL_PEDIDO).buildUpon().appendQueryParameter(PARAMETER, String.valueOf(comanda)).build();
         String builtUrl = builtUri.toString();
 
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -119,21 +126,23 @@ public class CarrinhoActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            for (int i = 0; i < response.length(); i++) {
-                                JSONObject objt = response.getJSONObject(i);
+                               for (int i = 0; i < response.length(); i++) {
+                                        JSONObject objt = response.getJSONObject(i);
 
-                                JSONObject prod = objt.getJSONObject("Produto");
-                                JSONObject pedido = objt.getJSONObject("Pedido");
+                                        JSONObject prod = objt.getJSONObject("Produto");
+                                        JSONObject pedido = objt.getJSONObject("Pedido");
 
-                                Carrinho carrinho = new Carrinho();
-                                carrinho.setNomeProd(prod.getString("nomeProd"));
-                                carrinho.setImgProd(prod.getString("preco"));
-                                carrinho.setObsPed(pedido.getString("descrPedido"));
-                                carrinho.setSubPed(subtotal);
+                                        Carrinho carrinho = new Carrinho();
+                                        carrinho.setNomeProd(prod.getString("nomeProd"));
+                                        carrinho.setImgProd(prod.getString("imgProd"));
+                                        carrinho.setObsPed(pedido.getString("descrPedido"));
+                                        int qtdProd = pedido.getInt("qtdProd");
+                                        double preco = prod.getDouble("preco");
+                                        double result = (preco * qtdProd);
+                                        carrinho.setSubPed(result);
 
-
-                                carrinhoList.add(carrinho);
-                            }
+                                        carrinhoList.add(carrinho);
+                               }
                             CarrinhoListView adapter = new CarrinhoListView(getApplicationContext(),R.layout.listview_carrinho, carrinhoList);
                             listViewProduct = findViewById(R.id.listviewCarrinho);
                             listViewProduct.setAdapter(adapter);
@@ -150,6 +159,26 @@ public class CarrinhoActivity extends AppCompatActivity {
         queue.add(jsonArrayRequest);
     }
 
+    // LER DADOS DO ARQUIVO JSON
+    private String lerDados() {
+        FileInputStream fis;
+        try {
+            fis = openFileInput(FILE_NAME);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String text;
+            while ((text = br.readLine()) != null) {
+                sb.append(text).append("\n");
+            }
+            return sb.toString();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     // MENU FRAGMENT
     public void displayFragment() {
         MenuFragment menuFragment = MenuFragment.newInstance();

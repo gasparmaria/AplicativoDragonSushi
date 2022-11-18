@@ -26,6 +26,7 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.dragonsushi.Objects.Comanda;
 import com.example.dragonsushi.Objects.Product;
+import com.example.dragonsushi.Objects.User;
 import com.example.dragonsushi.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -33,6 +34,9 @@ import com.google.gson.JsonObject;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 public class DetalhesActivity extends AppCompatActivity {
@@ -44,10 +48,12 @@ public class DetalhesActivity extends AppCompatActivity {
     double price, subtotal;
     Integer counter;
     int idComanda;
-    String URL_GETCOMANDA = "https://firstbluebook23.conveyor.cloud/api/ComandaApi/ComandaDelivery";
-    String URL_POSTCOMANDA = "https://firstbluebook23.conveyor.cloud/api/ComandaApi/";
-    String URL_POSTPEDIDO = "https://firstbluebook23.conveyor.cloud/api/PedidoApi/";
-    Intent intentComanda ;
+    String URL_GETCOMANDA = "https://tallpurplemouse41.conveyor.cloud/api/ComandaApi/ComandaDelivery";
+    String URL_POSTCOMANDA = "https://tallpurplemouse41.conveyor.cloud/api/ComandaApi/";
+    String URL_POSTPEDIDO = "https://tallpurplemouse41.conveyor.cloud/api/PedidoApi/";
+
+    private static final String FILE_NAME = "comanda.json";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,16 +111,14 @@ public class DetalhesActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getComanda(counter);
-                intentComanda = new Intent(getApplicationContext(), CarrinhoActivity.class);
-                intentComanda.putExtra("Subtotal", subtotal);
-                intentComanda.putExtra("Comanda", idComanda);
+                getComanda(counter, subtotal);
+                Intent intentComanda = new Intent(getApplicationContext(), CarrinhoActivity.class);
                 startActivity(intentComanda);
             }
         });
     }
 
-    private void getComanda(int counte){
+    private void getComanda(int counte, double subtotal){
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_GETCOMANDA,
                 new Response.Listener<String>() {
@@ -122,7 +126,18 @@ public class DetalhesActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            int idComanda = jsonObject.getInt("idComanda");
+                            idComanda = jsonObject.getInt("idComanda");
+
+                            Comanda comanda = new Comanda();
+                            comanda.setSubtotal(subtotal);
+                            comanda.setIdComanda(idComanda);
+
+                            Gson gson = new Gson();
+                          //  Comanda comandaJson = new Comanda();
+                           // comandaJson = gson.fromJson(comanda.toString(), Comanda.class);
+                            String json = gson.toJson(comanda);
+                            gravarDados(json);
+
                             if(idComanda == 0) {
                                 postComanda();
                             } else{
@@ -192,9 +207,31 @@ public class DetalhesActivity extends AppCompatActivity {
                 }
             };
             requestQueue.add(stringRequest);
-            getComanda(counter);
+            getComanda(counter, subtotal);
         }catch (Exception e){
             e.printStackTrace();
+        }
+
+    }
+
+    // ARMAZENAR DADOS NO ARQUIVO JASON
+    private void gravarDados(String json) {
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            fos.write(json.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.dragonsushi.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +52,7 @@ public class CarrinhoListView extends BaseAdapter {
         LinearLayout constrait;
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
@@ -79,7 +81,7 @@ public class CarrinhoListView extends BaseAdapter {
         holder.txtNomeProduto.setText(Carrinho.getNomeProd());
         holder.txtObsProduto.setText(Carrinho.getObsPed());
         holder.txtNomeProduto.setText(Carrinho.getNomeProd());
-        holder.txtSubtotalProduto.setText(Carrinho.getSubPed());
+        holder.txtSubtotalProduto.setText(String.format("%.2f",(Carrinho.getSubPed())));
 
         return row;
     }
