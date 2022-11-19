@@ -32,7 +32,11 @@
             <TextView
                 style="@style/title3"
                 android:text="@string/carrinho"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:padding="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="5dp"/>
 
             <TextView
                 android:id="@+id/txtLimpar"
@@ -157,7 +161,7 @@
             android:layout_height="30dp"
             style="@style/buttonSalvar"
             android:text="@string/fazer_pedido"
-            android:layout_marginTop="40dp"/>
+            android:layout_marginTop="20dp"/>
     </LinearLayout>
 
     <FrameLayout
