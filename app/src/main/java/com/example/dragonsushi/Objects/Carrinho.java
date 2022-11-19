@@ -2,13 +2,18 @@ package com.example.dragonsushi.Objects;
 
 import android.widget.ImageView;
 
-public class Carrinho {
+import java.io.Serializable;
+
+public class Carrinho implements Serializable {
+    int idPedido;
     String imgProd, nomeProd, obsPed;
+
     double subPed;
 
     public Carrinho(){}
 
-    public Carrinho(String imgProd, String nomeProd, String obsPed, double subPed) {
+    public Carrinho(int idPedido, String imgProd, String nomeProd, String obsPed, double subPed) {
+        this.idPedido = idPedido;
         this.imgProd = imgProd;
         this.nomeProd = nomeProd;
         this.obsPed = obsPed;
@@ -46,4 +51,13 @@ public class Carrinho {
     public void setSubPed(double subPed) {
         this.subPed = subPed;
     }
+
+    public int getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(int idPedido) {
+        this.idPedido = idPedido;
+    }
+
 }

@@ -3,6 +3,7 @@ package com.example.dragonsushi.Activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -12,19 +13,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dragonsushi.Adapters.CarrinhoListView;
 import com.example.dragonsushi.Adapters.MenuFragment;
 import com.example.dragonsushi.Objects.Carrinho;
+import com.example.dragonsushi.Objects.Client;
 import com.example.dragonsushi.Objects.Comanda;
 import com.example.dragonsushi.Objects.Endereco;
 import com.example.dragonsushi.Objects.FormaPagamento;
 import com.example.dragonsushi.Objects.Logradouro;
+import com.example.dragonsushi.Objects.Person;
+import com.example.dragonsushi.Objects.User;
 import com.example.dragonsushi.R;
 import com.google.gson.Gson;
 
@@ -37,6 +46,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,11 +55,13 @@ public class CarrinhoActivity extends AppCompatActivity {
     Button btnPedido;
     String URL_PEDIDO = "https://littleorangestone64.conveyor.cloud/api/PedidoApi/ConsultarPedidos";
     String URL_LIMPAR = "https://littleorangestone64.conveyor.cloud/api/ComandaApi/LimparCarrinho";
+    String URL_DELIVERY = "https://littleorangestone64.conveyor.cloud/api/DeliveryApi";
     String PARAMETER = "comanda";
     List<Carrinho> carrinhoList = new ArrayList<Carrinho>();
     List<Double> subtotalList = new ArrayList<>();
     ListView listViewProduct;
-    private static final String FILE_NAME = "comanda.json";
+    private static final String FILE_NAME_COMANDA = "comanda.json";
+    private static final String FILE_NAME_USUARIO = "usuarioLogado.json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +89,7 @@ public class CarrinhoActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         Gson gson = new Gson();
-        String comandaString = lerDados();
+        String comandaString = lerDadosComanda();
         Comanda comanda = gson.fromJson(comandaString,Comanda.class);
         int idComanda = comanda.getIdComanda();
         getPedido(idComanda);
@@ -135,6 +147,11 @@ public class CarrinhoActivity extends AppCompatActivity {
                 startActivity(intentPagto);
             });
         }
+
+        btnPedido.setOnClickListener(v ->{
+            double total = Double.parseDouble(txtTotal.getText().toString());
+            postDataDelivery(idComanda, total);
+        });
     }
 
     public void getPedido(int comanda){
@@ -158,6 +175,7 @@ public class CarrinhoActivity extends AppCompatActivity {
                                         carrinho.setNomeProd(prod.getString("nomeProd"));
                                         carrinho.setImgProd(prod.getString("imgProd"));
                                         carrinho.setObsPed(pedido.getString("descrPedido"));
+                                        carrinho.setIdPedido(pedido.getInt("idPedido"));
                                         int qtdProd = pedido.getInt("qtdProd");
                                         double preco = prod.getDouble("preco");
                                         double result = (preco * qtdProd);
@@ -191,11 +209,120 @@ public class CarrinhoActivity extends AppCompatActivity {
         queue.add(jsonArrayRequest);
     }
 
+    public void postDataDelivery(int idComanda, double total){
+        try {
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+            Intent intent = getIntent();
+
+            Endereco address = (Endereco) intent.getSerializableExtra("Endereco");
+            String numEndereco = address.getNumero();
+            String descrEndereco = address.getComplemento();
+
+            FormaPagamento formaPagamento = (FormaPagamento) intent.getSerializableExtra("Pagamento");
+            String formaPagto = formaPagamento.getFormaPag();
+
+            Gson gson = new Gson();
+            String usuarioString = lerDadosUsuario();
+            Client client = gson.fromJson(usuarioString, Client.class);
+            Person person = client.getPerson();
+            int idPessoa = person.getId();
+
+            JSONObject pessoa = new JSONObject();
+            pessoa.put("idPessoa", idPessoa);
+
+            JSONObject comanda = new JSONObject();
+            comanda.put("idComanda", idComanda);
+
+            JSONObject pagamento = new JSONObject();
+            pagamento.put("total", total);
+
+            JSONObject formaPg = new JSONObject();
+            formaPg.put("formaPagto", formaPagto);
+
+            JSONObject endereco = new JSONObject();
+            endereco.put("idEndereco", address.getId());
+
+            JSONObject delivery = new JSONObject();
+            delivery.put("numEndereco", numEndereco);
+            delivery.put("descrEndereco", descrEndereco);
+
+
+            JSONObject jsonBody = new JSONObject();
+            jsonBody.put("Pessoa", pessoa);
+            jsonBody.put("Endereco", endereco);
+            jsonBody.put("Comanda", comanda);
+            jsonBody.put("Pagamento", pagamento);
+            jsonBody.put("FormaPg", formaPg);
+            jsonBody.put("Delivery", delivery);
+
+            final String requestBody = jsonBody.toString();
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DELIVERY, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.i("VOLLEY", response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("VOLLEY", error.toString());
+                }
+            }) {
+                @Override
+                public String getBodyContentType() {
+                    return "application/json; charset=utf-8";
+                }
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    try {
+                        return requestBody == null ? null : requestBody.getBytes("utf-8");
+                    } catch (UnsupportedEncodingException uee) {
+                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                        return null;
+                    }
+                }
+                @Override
+                protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                    String responseString = "";
+                    if (response != null) {
+                        responseString = String.valueOf(response.statusCode);
+                        // can get more details such as response.headers
+                    }
+                    return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
+                }
+            };
+            requestQueue.add(stringRequest);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     // LER DADOS DO ARQUIVO JSON
-    private String lerDados() {
+    private String lerDadosComanda() {
         FileInputStream fis;
         try {
-            fis = openFileInput(FILE_NAME);
+            fis = openFileInput(FILE_NAME_COMANDA);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String text;
+            while ((text = br.readLine()) != null) {
+                sb.append(text).append("\n");
+            }
+            return sb.toString();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private String lerDadosUsuario() {
+        FileInputStream fis;
+        try {
+            fis = openFileInput(FILE_NAME_USUARIO);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             StringBuilder sb = new StringBuilder();

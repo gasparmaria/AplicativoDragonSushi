@@ -26,6 +26,7 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.example.dragonsushi.Objects.Carrinho;
 import com.example.dragonsushi.Objects.Comanda;
 import com.example.dragonsushi.Objects.Product;
 import com.example.dragonsushi.Objects.User;
@@ -77,9 +78,7 @@ public class DetalhesActivity extends AppCompatActivity {
 
 
         btnBack.setOnClickListener(v ->{
-            Intent it = new Intent(this, CategoriaActivity.class);
-            it.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            startActivity(it);
+            onBackPressed();
         });
 
         Intent intent = getIntent();
@@ -95,14 +94,14 @@ public class DetalhesActivity extends AppCompatActivity {
         price = product.getPreco();
 
         counter = 1;
-        btnMore.setOnClickListener(v ->{
+        btnMore.setOnClickListener(v -> {
             counter++;
             subtotal = updateCounter(price);
-            if(counter > 2){
+            if (counter > 1) {
                 btnLess.setEnabled(true);
             }
         });
-        btnLess.setOnClickListener(v ->{
+        btnLess.setOnClickListener(v -> {
             counter--;
             subtotal = updateCounter(price);
             if (counter < 1) {
@@ -221,7 +220,6 @@ public class DetalhesActivity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
 
     // ARMAZENAR DADOS NO ARQUIVO JASON
@@ -245,7 +243,7 @@ public class DetalhesActivity extends AppCompatActivity {
         }
     }
 
-
+    // CONTADOR DA QUANTIDADE DO PRODUTO
     private double updateCounter(double price){
         txtQntd.setText(counter.toString());
         subtotal = price * counter;
@@ -254,8 +252,8 @@ public class DetalhesActivity extends AppCompatActivity {
         return subtotal;
     }
 
+    // CADASTRAR PEDIDO PELA API
     private void postPedido(int counter, String descricao,int id,int numComanda){
-
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
 
@@ -307,7 +305,6 @@ public class DetalhesActivity extends AppCompatActivity {
                     String responseString = "";
                     if (response != null) {
                         responseString = String.valueOf(response.statusCode);
-                        // can get more details such as response.headers
                     }
                     return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
                 }
@@ -316,15 +313,5 @@ public class DetalhesActivity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
-    }
-
-
-    // MENSAGENS
-    private void message(){
-        Toast.makeText(this, "Login ou senha não correspondem.", Toast.LENGTH_SHORT).show();
-    }
-
-    private void nullMessage(){
-        Toast.makeText(this, "Login não cadastrado.", Toast.LENGTH_SHORT).show();
     }
 }
