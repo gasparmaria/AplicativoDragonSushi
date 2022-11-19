@@ -176,34 +176,34 @@ public class CarrinhoActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                               for (int i = 0; i < response.length(); i++) {
-                                        JSONObject objt = response.getJSONObject(i);
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject objt = response.getJSONObject(i);
 
-                                        JSONObject prod = objt.getJSONObject("Produto");
-                                        JSONObject pedido = objt.getJSONObject("Pedido");
+                                JSONObject prod = objt.getJSONObject("Produto");
+                                JSONObject pedido = objt.getJSONObject("Pedido");
 
-                                        Carrinho carrinho = new Carrinho();
-                                        carrinho.setNomeProd(prod.getString("nomeProd"));
-                                        carrinho.setImgProd(prod.getString("imgProd"));
-                                        carrinho.setObsPed(pedido.getString("descrPedido"));
-                                        carrinho.setIdPedido(pedido.getInt("idPedido"));
-                                        int qtdProd = pedido.getInt("qtdProd");
-                                        double preco = prod.getDouble("preco");
-                                        double result = (preco * qtdProd);
-                                        carrinho.setSubPed(result);
+                                Carrinho carrinho = new Carrinho();
+                                carrinho.setNomeProd(prod.getString("nomeProd"));
+                                carrinho.setImgProd(prod.getString("imgProd"));
+                                carrinho.setObsPed(pedido.getString("descrPedido"));
+                                carrinho.setIdPedido(pedido.getInt("idPedido"));
+                                int qtdProd = pedido.getInt("qtdProd");
+                                double preco = prod.getDouble("preco");
+                                double result = (preco * qtdProd);
+                                carrinho.setSubPed(result);
 
-                                        carrinhoList.add(carrinho);
-                                        subtotalList.add(result);
+                                carrinhoList.add(carrinho);
+                                subtotalList.add(result);
 
-                                        double subtotal = 0;
-                                        for(int x = 0; x < subtotalList.size(); x++){
-                                            subtotal = subtotal + subtotalList.get(x);
-                                        }
-                                        txtSubtotal.setText(String.format("R$%.2f", subtotal));
+                                double subtotal = 0;
+                                for(int x = 0; x < subtotalList.size(); x++){
+                                    subtotal = subtotal + subtotalList.get(x);
+                                }
+                                txtSubtotal.setText(String.format("R$%.2f", subtotal));
 
-                                        double total = subtotal + 5.99;
-                                        txtTotal.setText(String.format("R$%.2f", total));
-                               }
+                                double total = subtotal + 5.99;
+                                txtTotal.setText(String.format("R$%.2f", total));
+                            }
                             CarrinhoListView adapter = new CarrinhoListView(getApplicationContext(),R.layout.listview_carrinho, carrinhoList);
                             listViewProduct = findViewById(R.id.listviewCarrinho);
                             listViewProduct.setAdapter(adapter);

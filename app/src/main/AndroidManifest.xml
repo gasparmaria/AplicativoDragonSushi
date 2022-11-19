@@ -42,6 +42,7 @@
         <activity android:name=".Activities.AddressActivity" />
         <activity android:name=".Activities.HistoricoPedidoActivity" />
         <activity android:name=".Activities.PagtoActivity" />
+        <activity android:name=".Activities.ActivitySucesso" />
         <activity android:name=".Activities.CarrinhoActivity"
             android:exported="true">
         </activity>

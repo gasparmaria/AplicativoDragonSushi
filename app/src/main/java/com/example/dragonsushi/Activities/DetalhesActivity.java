@@ -51,9 +51,9 @@ public class DetalhesActivity extends AppCompatActivity {
     double price, subtotal;
     Integer counter;
     int idComanda;
-    String URL_GETCOMANDA = "https://lostyellowsled41.conveyor.cloud/api/ComandaApi/ComandaDelivery";
-    String URL_POSTCOMANDA = "https://lostyellowsled41.conveyor.cloud/api/ComandaApi/";
-    String URL_POSTPEDIDO = "https://lostyellowsled41.conveyor.cloud/api/PedidoApi/";
+    String URL_GETCOMANDA = "https://differentbluetower27.conveyor.cloud/api/ComandaApi/ComandaDelivery";
+    String URL_POSTCOMANDA = "https://differentbluetower27.conveyor.cloud/api/ComandaApi/";
+    String URL_POSTPEDIDO = "https://differentbluetower27.conveyor.cloud/api/PedidoApi/";
     private static final String FILE_NAME = "comanda.json";
 
     @Override
@@ -96,6 +96,7 @@ public class DetalhesActivity extends AppCompatActivity {
         counter = 1;
         btnMore.setOnClickListener(v -> {
             counter++;
+            txtQntd.setText(counter.toString());
             subtotal = updateCounter(price);
             if (counter > 1) {
                 btnLess.setEnabled(true);
