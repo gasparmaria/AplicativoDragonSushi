@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -42,10 +43,11 @@ import java.util.List;
 public class CarrinhoActivity extends AppCompatActivity {
     TextView txtLimpar, txtAddItem, txtSubtotal, txtTaxa, txtTotal, txtFormaPagto, txtEntrega;
     Button btnPedido;
-    String URL_PEDIDO = "https://tallpurplemouse41.conveyor.cloud/api/PedidoApi/ConsultarPedidos";
+    String URL_PEDIDO = "https://littleorangestone64.conveyor.cloud/api/PedidoApi/ConsultarPedidos";
+    String URL_LIMPAR = "https://littleorangestone64.conveyor.cloud/api/ComandaApi/LimparCarrinho";
     String PARAMETER = "comanda";
-    String comanda;
     List<Carrinho> carrinhoList = new ArrayList<Carrinho>();
+    List<Double> subtotalList = new ArrayList<>();
     ListView listViewProduct;
     private static final String FILE_NAME = "comanda.json";
 
@@ -70,9 +72,39 @@ public class CarrinhoActivity extends AppCompatActivity {
             startActivity(intentItem);
         });
 
-        txtTaxa.setText("RS5,99");
+        txtTaxa.setText("R$5,99");
 
         Intent intent = getIntent();
+
+        Gson gson = new Gson();
+        String comandaString = lerDados();
+        Comanda comanda = gson.fromJson(comandaString,Comanda.class);
+        int idComanda = comanda.getIdComanda();
+        getPedido(idComanda);
+
+        txtLimpar.setOnClickListener(v ->{
+            Uri builtUri = Uri.parse(URL_LIMPAR).buildUpon().appendQueryParameter(PARAMETER, String.valueOf(idComanda)).build();
+            String builtUrl = builtUri.toString();
+
+            RequestQueue queue = Volley.newRequestQueue(this);
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.DELETE, builtUrl,
+                    null,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            });
+            queue.add(jsonArrayRequest);
+
+            message();
+            Intent intenthome = new Intent(getApplicationContext(), HomeActivity.class);
+            startActivity(intenthome);
+        });
 
         if(intent.hasExtra("Endereco")){
             Endereco address = (Endereco) intent.getSerializableExtra("Endereco");
@@ -103,19 +135,9 @@ public class CarrinhoActivity extends AppCompatActivity {
                 startActivity(intentPagto);
             });
         }
-
-
-        Gson gson = new Gson();
-        String comandaString = lerDados();
-        Comanda comanda = gson.fromJson(comandaString,Comanda.class);
-        int idComanda = comanda.getIdComanda();
-        getPedido(idComanda);
-
     }
 
     public void getPedido(int comanda){
-
-
         Uri builtUri = Uri.parse(URL_PEDIDO).buildUpon().appendQueryParameter(PARAMETER, String.valueOf(comanda)).build();
         String builtUrl = builtUri.toString();
 
@@ -142,6 +164,16 @@ public class CarrinhoActivity extends AppCompatActivity {
                                         carrinho.setSubPed(result);
 
                                         carrinhoList.add(carrinho);
+                                        subtotalList.add(result);
+
+                                        double subtotal = 0;
+                                        for(int x = 0; x < subtotalList.size(); x++){
+                                            subtotal = subtotal + subtotalList.get(x);
+                                        }
+                                        txtSubtotal.setText(String.format("R$%.2f", subtotal));
+
+                                        double total = subtotal + 5.99;
+                                        txtTotal.setText(String.format("R$%.2f", total));
                                }
                             CarrinhoListView adapter = new CarrinhoListView(getApplicationContext(),R.layout.listview_carrinho, carrinhoList);
                             listViewProduct = findViewById(R.id.listviewCarrinho);
@@ -179,6 +211,7 @@ public class CarrinhoActivity extends AppCompatActivity {
         }
         return null;
     }
+
     // MENU FRAGMENT
     public void displayFragment() {
         MenuFragment menuFragment = MenuFragment.newInstance();
@@ -187,4 +220,10 @@ public class CarrinhoActivity extends AppCompatActivity {
 
         fragmentTransaction.add(R.id.bottom_menu,menuFragment).addToBackStack(null).commit();
     }
+
+    // MENSAGENS
+    private void message(){
+        Toast.makeText(this, "Carrinho limpo", Toast.LENGTH_SHORT).show();
+    }
+
 }

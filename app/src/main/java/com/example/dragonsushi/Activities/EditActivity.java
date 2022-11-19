@@ -39,7 +39,7 @@ public class EditActivity extends AppCompatActivity {
     EditText edtxtNome, edtxtTelefone, edtxtEmail, edtxtSenha, edtxtConfSenha;
     Button btnSalvar;
     String nome, telefone, email, senha, confirmar;
-    String URL = "https://tallpurpleboard19.conveyor.cloud/api/UsuarioApi/EditarUsuario";
+    String URL = "https://littleorangestone64.conveyor.cloud/api/UsuarioApi/EditarUsuario";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

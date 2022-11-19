@@ -48,7 +48,7 @@ public class CarrinhoListView extends BaseAdapter {
     private class ViewHolder {
         ImageView imgProduto;
         TextView txtNomeProduto, txtObsProduto, txtSubtotalProduto;
-        ImageButton btnEditar, btnExcluir;
+        ImageButton btnExcluir;
         LinearLayout constrait;
     }
 
@@ -70,7 +70,6 @@ public class CarrinhoListView extends BaseAdapter {
             holder.txtNomeProduto = row.findViewById(R.id.txtNomeProduto);
             holder.txtObsProduto = row.findViewById(R.id.txtObsProduto);
             holder.txtSubtotalProduto = row.findViewById(R.id.txtSubtotalProduto);
-            holder.btnEditar = row.findViewById(R.id.btnEditar);
             holder.btnExcluir = row.findViewById(R.id.btnExcluir);
             row.setTag(holder);
         }
@@ -81,7 +80,7 @@ public class CarrinhoListView extends BaseAdapter {
         holder.txtNomeProduto.setText(Carrinho.getNomeProd());
         holder.txtObsProduto.setText(Carrinho.getObsPed());
         holder.txtNomeProduto.setText(Carrinho.getNomeProd());
-        holder.txtSubtotalProduto.setText(String.format("%.2f",(Carrinho.getSubPed())));
+        holder.txtSubtotalProduto.setText(String.format("R$%.2f",(Carrinho.getSubPed())));
 
         return row;
     }

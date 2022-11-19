@@ -50,9 +50,9 @@ public class DetalhesActivity extends AppCompatActivity {
     double price, subtotal;
     Integer counter;
     int idComanda;
-    String URL_GETCOMANDA = "https://tallpurplemouse41.conveyor.cloud/api/ComandaApi/ComandaDelivery";
-    String URL_POSTCOMANDA = "https://tallpurplemouse41.conveyor.cloud/api/ComandaApi/";
-    String URL_POSTPEDIDO = "https://tallpurplemouse41.conveyor.cloud/api/PedidoApi/";
+    String URL_GETCOMANDA = "https://littleorangestone64.conveyor.cloud/api/ComandaApi/ComandaDelivery";
+    String URL_POSTCOMANDA = "https://littleorangestone64.conveyor.cloud/api/ComandaApi/";
+    String URL_POSTPEDIDO = "https://littleorangestone64.conveyor.cloud/api/PedidoApi/";
 
     private static final String FILE_NAME = "comanda.json";
 
@@ -94,11 +94,11 @@ public class DetalhesActivity extends AppCompatActivity {
 
         price = product.getPreco();
 
-        counter = 0;
+        counter = 1;
         btnMore.setOnClickListener(v ->{
             counter++;
             subtotal = updateCounter(price);
-            if(counter > 0){
+            if(counter > 2){
                 btnLess.setEnabled(true);
             }
         });
@@ -140,8 +140,6 @@ public class DetalhesActivity extends AppCompatActivity {
                             comanda.setIdComanda(idComanda);
 
                             Gson gson = new Gson();
-                          //  Comanda comandaJson = new Comanda();
-                           // comandaJson = gson.fromJson(comanda.toString(), Comanda.class);
                             String json = gson.toJson(comanda);
                             gravarDados(json);
 
@@ -214,6 +212,11 @@ public class DetalhesActivity extends AppCompatActivity {
                 }
             };
             requestQueue.add(stringRequest);
+            try {
+                sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             getComanda(counter, subtotal);
         }catch (Exception e){
             e.printStackTrace();

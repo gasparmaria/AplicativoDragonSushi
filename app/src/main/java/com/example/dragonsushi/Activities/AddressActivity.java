@@ -52,7 +52,7 @@ public class AddressActivity extends AppCompatActivity {
     EditText edtxtLogradouro, edtxtNumero, edtxtBairro, edtxtComplemento, edtxtCidade, edtxtUf;
     String logradouro, numero, bairro, complemento, cidade, uf;
     Button btnSalvar;
-    String URL = "https://tallpurpleboard19.conveyor.cloud/api/EnderecoApi/";
+    String URL = "https://littleorangestone64.conveyor.cloud/api/EnderecoApi/";
     private FusedLocationProviderClient fusedLocationProviderClient;
 
     @Override
