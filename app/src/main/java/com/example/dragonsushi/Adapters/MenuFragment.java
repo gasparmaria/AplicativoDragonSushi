@@ -10,11 +10,22 @@ import android.widget.ImageButton;
 import androidx.fragment.app.Fragment;
 
 import com.example.dragonsushi.Activities.BuscaActivity;
+import com.example.dragonsushi.Activities.CarrinhoActivity;
 import com.example.dragonsushi.Activities.HomeActivity;
 import com.example.dragonsushi.Activities.PerfilActivity;
+import com.example.dragonsushi.Objects.Comanda;
 import com.example.dragonsushi.R;
+import com.google.gson.Gson;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class MenuFragment extends Fragment {
+
+    private static final String FILE_NAME = "comanda.json";
 
     public MenuFragment() {
 
@@ -28,7 +39,6 @@ public class MenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // inicia o layoute para o fragmento
         final View rootView = inflater.inflate(R.layout.bottom_menu,
                 container, false);
         final ImageButton btnHome = rootView.findViewById(R.id.menu_home);
@@ -41,7 +51,7 @@ public class MenuFragment extends Fragment {
             startActivity(intent);
         });
         btnCart.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), HomeActivity.class);
+            Intent intent = new Intent(getContext(), CarrinhoActivity.class);
             startActivity(intent);
         });
         btnSearch.setOnClickListener(v -> {

@@ -41,6 +41,10 @@ import org.json.JSONObject;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.gson.Gson;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -52,7 +56,8 @@ public class AddressActivity extends AppCompatActivity {
     EditText edtxtLogradouro, edtxtNumero, edtxtBairro, edtxtComplemento, edtxtCidade, edtxtUf;
     String logradouro, numero, bairro, complemento, cidade, uf;
     Button btnSalvar;
-    String URL = "https://littleorangestone64.conveyor.cloud/api/EnderecoApi/";
+    String URL = "https://lostyellowsled41.conveyor.cloud/api/EnderecoApi/";
+    private static final String FILE_NAME = "endereco.json";
     private FusedLocationProviderClient fusedLocationProviderClient;
 
     @Override
@@ -81,6 +86,8 @@ public class AddressActivity extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
+
+        // EDITAR ENDEREÇO
         if(intent.hasExtra("Endereco")){
             Endereco oEndereco = (Endereco) intent.getSerializableExtra("Endereco");
 
@@ -95,39 +102,49 @@ public class AddressActivity extends AppCompatActivity {
             edtxtComplemento.setText(oEndereco.getComplemento());
             edtxtCidade.setText(oCidade.getCidade());
             edtxtUf.setText(oEstado.getUf());
-        } else {
-            btnSalvar.setOnClickListener(v -> {
-                logradouro = String.valueOf(edtxtLogradouro.getText());
-                numero = String.valueOf(edtxtNumero.getText());
-                bairro = String.valueOf(edtxtBairro.getText());
-                complemento = String.valueOf(edtxtComplemento.getText());
-                cidade = String.valueOf(edtxtCidade.getText());
-                uf = String.valueOf(edtxtUf.getText());
 
-                if (!uf.equals("SP")){
-                    edtxtUf.requestFocus();
-                    Toast.makeText(this, "Entregamos apenas em São Paulo", Toast.LENGTH_SHORT).show();
-                } else {
-                    try {
-                        Logradouro cLogradouro = new Logradouro(logradouro);
-                        Bairro cBairro = new Bairro(bairro);
-                        Cidade cCidade = new Cidade(cidade);
-                        Estado cEstado = new Estado(uf);
-                        Endereco cEndereco = new Endereco(cLogradouro, cBairro, cCidade, cEstado, numero, complemento);
-
-                        validarCampos();
-                        postDataAddress(cLogradouro, cBairro, cCidade, cEstado);
-
-                        Intent intentAddress = new Intent(this, CarrinhoActivity.class);
-                        intentAddress.putExtra("Endereco", cEndereco);
-                        Toast.makeText(this, "Endereço salvo", Toast.LENGTH_SHORT).show();
-                        startActivity(intentAddress);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
         }
+
+        // SALVAR ENDEREÇO
+        btnSalvar.setOnClickListener(v -> {
+            logradouro = String.valueOf(edtxtLogradouro.getText());
+            numero = String.valueOf(edtxtNumero.getText());
+            bairro = String.valueOf(edtxtBairro.getText());
+            complemento = String.valueOf(edtxtComplemento.getText());
+            cidade = String.valueOf(edtxtCidade.getText());
+            uf = String.valueOf(edtxtUf.getText());
+
+            // LIMITAÇÃO DA ENTREGA APENAS A SÃO PAULO
+            if (!uf.equals("SP")){
+                edtxtUf.requestFocus();
+                Toast.makeText(this, "Entregamos apenas em São Paulo", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                try {
+                    Logradouro cLogradouro = new Logradouro(logradouro);
+                    Bairro cBairro = new Bairro(bairro);
+                    Cidade cCidade = new Cidade(cidade);
+                    Estado cEstado = new Estado(uf);
+                    Endereco cEndereco = new Endereco(cLogradouro, cBairro, cCidade, cEstado, numero, complemento);
+
+                    validarCampos();
+                    postDataAddress(cLogradouro, cBairro, cCidade, cEstado);
+
+                    Intent intentAddress = new Intent(this, CarrinhoActivity.class);
+                    //intentAddress.putExtra("Endereco", cEndereco);
+
+                    Gson gson = new Gson();
+                    String json = gson.toJson(cEndereco);
+                    gravarDados(json);
+
+                    Toast.makeText(this, "Endereço salvo", Toast.LENGTH_SHORT).show();
+                    startActivity(intentAddress);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
 
     // CADASTRAR ENDEREÇO PELA API
@@ -184,7 +201,6 @@ public class AddressActivity extends AppCompatActivity {
                     String responseString = "";
                     if (response != null) {
                         responseString = String.valueOf(response.statusCode);
-                        // can get more details such as response.headers
                     }
                     return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
                 }
@@ -235,6 +251,27 @@ public class AddressActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    // ARMAZENAR DADOS NO ARQUIVO JSON
+    private void gravarDados(String json) {
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            fos.write(json.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     // VALIDAÇÃO DE CAMPOS

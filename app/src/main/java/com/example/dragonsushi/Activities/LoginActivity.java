@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView txtCadastro;
     String login, senha;
     String PARAMETER = "login";
-    String URL = "https://littleorangestone64.conveyor.cloud/api/UsuarioApi/ConsultarUsuario";
+    String URL = "https://lostyellowsled41.conveyor.cloud/api/UsuarioApi/ConsultarUsuario";
     DataBase dataBase;
     SQLiteDatabase conection;
     private static final String FILE_NAME = "usuarioLogado.json";
@@ -182,7 +182,7 @@ public class LoginActivity extends AppCompatActivity {
         return conection.insert("tbClient", null, values);
     }
 
-    // ARMAZENAR DADOS NO ARQUIVO JASON
+    // ARMAZENAR DADOS NO ARQUIVO JSON
     private void gravarDados(String json) {
         FileOutputStream fos = null;
         try {

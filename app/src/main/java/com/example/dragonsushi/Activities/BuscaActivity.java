@@ -32,7 +32,7 @@ public class BuscaActivity extends AppCompatActivity {
     ImageButton btnSearch;
     EditText edtxtSearch;
     String PARAMETER = "nomeProd";
-    String URL = "https://littleorangestone64.conveyor.cloud/api/ProdutoApi/ConsultarCardapio";
+    String URL = "https://lostyellowsled41.conveyor.cloud/api/ProdutoApi/ConsultarCardapio";
     private List<Product> productList = new ArrayList<Product>();
     ListView listViewProduct;
 

@@ -1,16 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.DragonSushi" parent="Theme.MaterialComponents.DayNight.NoActionBar"></style>
+    <style name="Theme.DragonSushi" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary" type="color">@color/principal_color</item>
         <item name="colorOnPrimary" type="color">@color/white</item>
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+
         <!-- Secondary brand color. -->
-        <item name="colorSecondary" type="color">@color/second_color</item>
+        <item name="colorSecondary" type="color">@color/white</item>
         <item name="colorOnSecondary" type="color">@color/white</item>
+    </style>
     <style name="Theme.DragonSushi.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
-    <style name="Theme.DragonSushi.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

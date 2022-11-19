@@ -51,12 +51,10 @@ public class DetalhesActivity extends AppCompatActivity {
     double price, subtotal;
     Integer counter;
     int idComanda;
-    String URL_GETCOMANDA = "https://littleorangestone64.conveyor.cloud/api/ComandaApi/ComandaDelivery";
-    String URL_POSTCOMANDA = "https://littleorangestone64.conveyor.cloud/api/ComandaApi/";
-    String URL_POSTPEDIDO = "https://littleorangestone64.conveyor.cloud/api/PedidoApi/";
-
+    String URL_GETCOMANDA = "https://lostyellowsled41.conveyor.cloud/api/ComandaApi/ComandaDelivery";
+    String URL_POSTCOMANDA = "https://lostyellowsled41.conveyor.cloud/api/ComandaApi/";
+    String URL_POSTPEDIDO = "https://lostyellowsled41.conveyor.cloud/api/PedidoApi/";
     private static final String FILE_NAME = "comanda.json";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,11 +74,12 @@ public class DetalhesActivity extends AppCompatActivity {
         txtSubtotal = findViewById(R.id.txtSubtotal);
         edtxtObs = findViewById(R.id.edtxtObservacao);
 
-
+        // VOLTAR PARA A TELA ANTERIOR
         btnBack.setOnClickListener(v ->{
             onBackPressed();
         });
 
+        // EXIBIR INFORMAÇÕES DO PRODUTO
         Intent intent = getIntent();
         intent.hasExtra("Product");
 
@@ -93,6 +92,7 @@ public class DetalhesActivity extends AppCompatActivity {
 
         price = product.getPreco();
 
+        // BOTÕES DE QUANTIDADE DO PRODUTO
         counter = 1;
         btnMore.setOnClickListener(v -> {
             counter++;
@@ -109,6 +109,7 @@ public class DetalhesActivity extends AppCompatActivity {
             }
         });
 
+        // ADICIONAR PRODUTO AO CARRINHO
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +125,7 @@ public class DetalhesActivity extends AppCompatActivity {
         });
     }
 
+    // PEGAR NÚMERO DA COMANDA
     private void getComanda(int counte, double subtotal){
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_GETCOMANDA,
@@ -151,7 +153,6 @@ public class DetalhesActivity extends AppCompatActivity {
                                 postPedido(counte, edtxtObs.getText().toString(), product.getId(), jsonObject.getInt("idComanda"));
                             }
 
-
                             Log.e("url", "SucessMesage:");
                         } catch (JSONException jsonException) {
                             jsonException.printStackTrace();
@@ -167,6 +168,7 @@ public class DetalhesActivity extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
+    // ABRIR NOVA COMANDA
     public void postComanda() {
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -222,7 +224,7 @@ public class DetalhesActivity extends AppCompatActivity {
         }
     }
 
-    // ARMAZENAR DADOS NO ARQUIVO JASON
+    // ARMAZENAR DADOS NO ARQUIVO JSON
     private void gravarDados(String json) {
         FileOutputStream fos = null;
         try {

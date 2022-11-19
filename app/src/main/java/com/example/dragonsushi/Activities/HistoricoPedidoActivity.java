@@ -41,7 +41,7 @@ import java.util.List;
 
 public class HistoricoPedidoActivity extends AppCompatActivity {
     String PARAMETER = "fkPessoa";
-    String URL = "https://littleorangestone64.conveyor.cloud/api/DeliveryApi/HistoricoPedido";
+    String URL = "https://lostyellowsled41.conveyor.cloud/api/DeliveryApi/HistoricoPedido";
     private static final String FILE_NAME = "usuarioLogado.json";
     private List<DeliveryViewModel> deliveryList = new ArrayList<DeliveryViewModel>();
     ListView listViewProduct;

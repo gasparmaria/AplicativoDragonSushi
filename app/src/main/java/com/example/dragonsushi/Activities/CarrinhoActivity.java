@@ -53,15 +53,17 @@ import java.util.List;
 public class CarrinhoActivity extends AppCompatActivity {
     TextView txtLimpar, txtAddItem, txtSubtotal, txtTaxa, txtTotal, txtFormaPagto, txtEntrega;
     Button btnPedido;
-    String URL_PEDIDO = "https://littleorangestone64.conveyor.cloud/api/PedidoApi/ConsultarPedidos";
-    String URL_LIMPAR = "https://littleorangestone64.conveyor.cloud/api/ComandaApi/LimparCarrinho";
-    String URL_DELIVERY = "https://littleorangestone64.conveyor.cloud/api/DeliveryApi";
+    String URL_PEDIDO = "https://lostyellowsled41.conveyor.cloud/api/PedidoApi/ConsultarPedidos";
+    String URL_LIMPAR = "https://lostyellowsled41.conveyor.cloud/api/ComandaApi/LimparCarrinho";
+    String URL_DELIVERY = "https://lostyellowsled41.conveyor.cloud/api/DeliveryApi";
     String PARAMETER = "comanda";
     List<Carrinho> carrinhoList = new ArrayList<Carrinho>();
     List<Double> subtotalList = new ArrayList<>();
     ListView listViewProduct;
     private static final String FILE_NAME_COMANDA = "comanda.json";
     private static final String FILE_NAME_USUARIO = "usuarioLogado.json";
+    private static final String FILE_NAME_ENDERECO = "endereco.json";
+    private static final String FILE_NAME_PAGAMENTO = "pagamento.json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,21 +81,21 @@ public class CarrinhoActivity extends AppCompatActivity {
         txtEntrega = findViewById(R.id.txtEntrega);
         btnPedido = findViewById(R.id.btnPedido);
 
+        txtTaxa.setText("R$5,99");
+
+        // BOTÃO ADICIONAR MAIS ITENS
         txtAddItem.setOnClickListener(v -> {
             Intent intentItem = new Intent(this, HomeActivity.class);
             startActivity(intentItem);
         });
 
-        txtTaxa.setText("R$5,99");
-
-        Intent intent = getIntent();
-
         Gson gson = new Gson();
-        String comandaString = lerDadosComanda();
-        Comanda comanda = gson.fromJson(comandaString,Comanda.class);
+        String comandaString = lerDados(FILE_NAME_COMANDA);
+        Comanda comanda = gson.fromJson(comandaString, Comanda.class);
         int idComanda = comanda.getIdComanda();
         getPedido(idComanda);
 
+        // BOTÃO LIMPAR CARRINHO
         txtLimpar.setOnClickListener(v ->{
             Uri builtUri = Uri.parse(URL_LIMPAR).buildUpon().appendQueryParameter(PARAMETER, String.valueOf(idComanda)).build();
             String builtUrl = builtUri.toString();
@@ -118,42 +120,51 @@ public class CarrinhoActivity extends AppCompatActivity {
             startActivity(intenthome);
         });
 
-        if(intent.hasExtra("Endereco")){
-            Endereco address = (Endereco) intent.getSerializableExtra("Endereco");
-            Logradouro logradouro = address.getLogradouro();
+        // TEXTVIEW DO ENDEREÇO
+        String enderecoString = lerDados(FILE_NAME_ENDERECO);
+        Endereco endereco = gson.fromJson(enderecoString, Endereco.class);
+
+        if(enderecoString != null){
+            Logradouro logradouro = endereco.getLogradouro();
             txtEntrega.setText(logradouro.getLogradouro());
-            txtEntrega.setOnClickListener(v ->{
-                Intent intentAddress = new Intent(getApplicationContext(), AddressActivity.class);
-                intentAddress.putExtra("Endereco", address);
-                startActivity(intentAddress);
-            });
-        } else{
-            txtEntrega.setOnClickListener(v ->{
-                Intent intentAddress = new Intent(getApplicationContext(), AddressActivity.class);
-                startActivity(intentAddress);
-            });
         }
 
-        if(intent.hasExtra("Pagamento")){
-            FormaPagamento formaPagamento = (FormaPagamento) intent.getSerializableExtra("Pagamento");
+        txtEntrega.setOnClickListener(v -> {
+            if(enderecoString != null){
+                Intent intentAddress = new Intent(getApplicationContext(), AddressActivity.class);
+                intentAddress.putExtra("Endereco", endereco);
+                startActivity(intentAddress);
+            }
+            else{
+                Intent intentAddress = new Intent(getApplicationContext(), AddressActivity.class);
+                startActivity(intentAddress);
+            }
+        });
+
+        // TEXTVIEW DO PAGAMENTO
+        String pagamentoString = lerDados(FILE_NAME_PAGAMENTO);
+        FormaPagamento formaPagamento = gson.fromJson(pagamentoString, FormaPagamento.class);
+
+        if(pagamentoString != null){
             txtFormaPagto.setText(formaPagamento.getFormaPag());
-            txtFormaPagto.setOnClickListener(v ->{
-                Intent intentPagto = new Intent(getApplicationContext(), PagtoActivity.class);
-                startActivity(intentPagto);
-            });
-        } else{
-            txtFormaPagto.setOnClickListener(v ->{
-                Intent intentPagto = new Intent(getApplicationContext(), PagtoActivity.class);
-                startActivity(intentPagto);
-            });
         }
 
+        txtFormaPagto.setOnClickListener(v -> {
+            Intent intentPagto = new Intent(getApplicationContext(), PagtoActivity.class);
+            startActivity(intentPagto);
+        });
+
+        // BOTÃO PARA FINALIZAR O DELIVERY
         btnPedido.setOnClickListener(v ->{
-            double total = Double.parseDouble(txtTotal.getText().toString());
+            String valor = txtTotal.getText().toString();
+            String nova = valor.replace("R$", "");
+            String a = nova.replace(",", ".");
+            double total = Double.parseDouble(a);
             postDataDelivery(idComanda, total);
         });
     }
 
+    // LISTVIEW DOS PEDIDOS
     public void getPedido(int comanda){
         Uri builtUri = Uri.parse(URL_PEDIDO).buildUpon().appendQueryParameter(PARAMETER, String.valueOf(comanda)).build();
         String builtUrl = builtUri.toString();
@@ -209,25 +220,31 @@ public class CarrinhoActivity extends AppCompatActivity {
         queue.add(jsonArrayRequest);
     }
 
+    // CADASTRANDO O PEDIDO DELIVERY
     public void postDataDelivery(int idComanda, double total){
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-            Intent intent = getIntent();
+            Gson gson = new Gson();
 
-            Endereco address = (Endereco) intent.getSerializableExtra("Endereco");
-            String numEndereco = address.getNumero();
-            String descrEndereco = address.getComplemento();
+            // PEGANDO DADOS DO ENDEREÇO A PARTIR DO JSON
+            String enderecoString = lerDados(FILE_NAME_ENDERECO);
+            Endereco endereco = gson.fromJson(enderecoString, Endereco.class);
+            String numEndereco = endereco.getNumero();
+            String descrEndereco = endereco.getComplemento();
 
-            FormaPagamento formaPagamento = (FormaPagamento) intent.getSerializableExtra("Pagamento");
+            // PEGANDO DADOS DO PAGAMENTO A PARTIR DO JSON
+            String pagamentoString = lerDados(FILE_NAME_PAGAMENTO);
+            FormaPagamento formaPagamento = gson.fromJson(pagamentoString, FormaPagamento.class);
             String formaPagto = formaPagamento.getFormaPag();
 
-            Gson gson = new Gson();
-            String usuarioString = lerDadosUsuario();
+            // PEGANDO DADOS DO CLIENTE A PARTIR DO JSON
+            String usuarioString = lerDados(FILE_NAME_USUARIO);
             Client client = gson.fromJson(usuarioString, Client.class);
             Person person = client.getPerson();
             int idPessoa = person.getId();
 
+            // CONSTRUINDO OS OBJETOS DO BODY
             JSONObject pessoa = new JSONObject();
             pessoa.put("idPessoa", idPessoa);
 
@@ -238,19 +255,19 @@ public class CarrinhoActivity extends AppCompatActivity {
             pagamento.put("total", total);
 
             JSONObject formaPg = new JSONObject();
-            formaPg.put("formaPagto", formaPagto);
+            formaPg.put("formaPag", formaPagto);
 
-            JSONObject endereco = new JSONObject();
-            endereco.put("idEndereco", address.getId());
+            JSONObject end = new JSONObject();
+            end.put("idEndereco", "1");
 
             JSONObject delivery = new JSONObject();
             delivery.put("numEndereco", numEndereco);
             delivery.put("descrEndereco", descrEndereco);
 
-
+            // CONSTRUINDO O BODY
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("Pessoa", pessoa);
-            jsonBody.put("Endereco", endereco);
+            jsonBody.put("Endereco", end);
             jsonBody.put("Comanda", comanda);
             jsonBody.put("Pagamento", pagamento);
             jsonBody.put("FormaPg", formaPg);
@@ -258,6 +275,7 @@ public class CarrinhoActivity extends AppCompatActivity {
 
             final String requestBody = jsonBody.toString();
 
+            // POST FROM BODY
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DELIVERY, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -293,36 +311,19 @@ public class CarrinhoActivity extends AppCompatActivity {
                 }
             };
             requestQueue.add(stringRequest);
+
+            Intent intentsucesso = new Intent(this, ActivitySucesso.class);
+            startActivity(intentsucesso);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    // LER DADOS DO ARQUIVO JSON
-    private String lerDadosComanda() {
+    // LER DADOS DA COMANDA PELO ARQUIVO JSON
+    private String lerDados(String FILE_NAME) {
         FileInputStream fis;
         try {
-            fis = openFileInput(FILE_NAME_COMANDA);
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String text;
-            while ((text = br.readLine()) != null) {
-                sb.append(text).append("\n");
-            }
-            return sb.toString();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private String lerDadosUsuario() {
-        FileInputStream fis;
-        try {
-            fis = openFileInput(FILE_NAME_USUARIO);
+            fis = openFileInput(FILE_NAME);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             StringBuilder sb = new StringBuilder();
@@ -352,5 +353,4 @@ public class CarrinhoActivity extends AppCompatActivity {
     private void message(){
         Toast.makeText(this, "Carrinho limpo", Toast.LENGTH_SHORT).show();
     }
-
 }
