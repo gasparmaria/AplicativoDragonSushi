@@ -3,7 +3,7 @@
 <p>O presente aplicativo foi desenvolvido exclusivamente para Android, para o restaurante japonês Dragon Sushi.<br>
 Desenvolvido pela empresa Westen, composta por Gabriel Soares, Guilherme Ferreira, Guilherme Lemes, Gustavo Basilio, Henrique Roncon e Maria Eduarda Gaspar</p>
 <br>
-<p>O aplicativo consome dados da <a href="https://github.com/gasparmaria/DragonSushiAPI">API</a> desenvolvida, que por sua vez consome dados do banco local, sendo necessário executar - além da API - o arquivo <a href="https://github.com/gasparmaria/SystemDS/blob/main/Database/script.sql">"script.sql"</a>, no MySQL</p>
+<p>O aplicativo consome dados da <a href="https://github.com/gasparmaria/DragonSushiAPI">API</a> desenvolvida, que por sua vez consome dados do banco local, sendo necessário executar - além da API - o arquivo <a href="https://github.com/gasparmaria/SystemDS/blob/main/Database/script.sql">"script.sql"</a>, no MySQL. Os links da API referenciados no aplicativo derivam de uma hospedagem temporária na web, sendo necessário atualizá-los quando gerado outro link.</p>
 <br>
 <p>O aplicativo possui apenas um nível de acesso, sendo direcionado exclusivamente ao cliente.</p>
 <br>
